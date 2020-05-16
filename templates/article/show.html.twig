@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    single
+{% endblock %}
+
+{% block body %}
+    <a href="{{ url("article_index") }}">wróć</a>
+    {% if article is defined and article|length %}
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.category.name }}</p>
+        <p>{{ article.body }}</p>
+    {% endif %}
+{% endblock %}
