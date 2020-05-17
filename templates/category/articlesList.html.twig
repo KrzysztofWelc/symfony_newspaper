@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    single
+{% endblock %}
+
+{% block body %}
+    {% if category is defined and category.articles|length %}
+        <h1>{{ category.name }}</h1>
+        <ul>
+            {% for article in category.articles %}
+                <li><a href={{ url('article_show', {"id": article.id}) }}>{{ article.title }}</a></li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+{% endblock %}

@@ -8,7 +8,7 @@
     <a href="{{ url("article_index") }}">wróć</a>
     {% if article is defined and article|length %}
         <h1>{{ article.title }}</h1>
-        <p>{{ article.category.name }}</p>
+        <a href={{ url('category_show', {"name": article.category.name}) }}>{{ article.category.name }}</a>
         <p>{{ article.body }}</p>
     {% endif %}
 {% endblock %}

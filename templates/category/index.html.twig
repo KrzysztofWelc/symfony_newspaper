@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}categories{% endblock %}
+
+{% block body %}
+    {% if categories is defined and categories|length %}
+        <ul>
+            {% for category in categories %}
+                <li><a href={{ url('category_show', {"name": category.name}) }}>{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+{% endblock %}

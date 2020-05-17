@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ArticleController.
  *
- * @Route("/")
+ * @Route("/article")
  */
 class ArticleController extends AbstractController
 {
