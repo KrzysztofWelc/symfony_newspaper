@@ -5,13 +5,19 @@
 {% endblock %}
 
 {% block body %}
-    {% if category is defined and category.articles|length %}
-        <h1>{{ category.name }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
         <ul>
-            {% for article in category.articles %}
-                <li><a href={{ url('article_show', {"id": article.id}) }}>{{ article.title }}</a></li>
+            {% for article in pagination.items %}
+                <li><a href="{{ url('article_show', {"id": article.id}) }}">{{ article.title }}</a></li>
             {% endfor %}
         </ul>
 
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     {% endif %}
 {% endblock %}
