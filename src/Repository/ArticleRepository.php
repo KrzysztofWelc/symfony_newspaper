@@ -43,6 +43,22 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Save record.
+     *
+     * @param \App\Entity\Article $article Article entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Article $article): void
+    {
+        $article->setCreatedAt(new \DateTime());
+
+        $this->_em->persist($article);
+        $this->_em->flush($article);
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
@@ -53,4 +69,5 @@ class ArticleRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('article');
     }
+
 }

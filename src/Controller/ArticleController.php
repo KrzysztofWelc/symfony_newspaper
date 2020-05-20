@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,7 +45,7 @@ class ArticleController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      * @Route(
-     *     "/{id}",
+     *     "/show/{id}",
      *     name="article_show",
      * )
      */
@@ -53,6 +54,41 @@ class ArticleController extends AbstractController
         return $this->render(
             'article/show.html.twig',
             ['article' => $article]
+        );
+    }
+
+    /**
+     * Create action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
+     * @param \App\Repository\ArticleRepository         $articleRepository Article repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/create",
+     *     methods={"GET", "POST"},
+     *     name="article_create",
+     * )
+     */
+    public function create(Request $request, ArticleRepository $articleRepository): Response
+    {
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $articleRepository->save($article);
+
+            return $this->redirectToRoute('article_index');
+        }
+
+        return $this->render(
+            'article/create.html.twig',
+            ['form' => $form->createView()]
         );
     }
 }
