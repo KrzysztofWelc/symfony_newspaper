@@ -6,6 +6,7 @@
 
 {% block body %}
     <a href="{{ url("article_index") }}">wróć</a>
+    <a href="{{ url("article_edit", {"id": article.id}) }}">edutuj</a>
     {% if article is defined and article|length %}
         <h1>{{ article.title }}</h1>
         <a href={{ url('category_show', {"name": article.category.name}) }}>{{ article.category.name }}</a>

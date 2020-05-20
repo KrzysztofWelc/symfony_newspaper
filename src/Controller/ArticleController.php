@@ -91,4 +91,43 @@ class ArticleController extends AbstractController
             ['form' => $form->createView()]
         );
     }
+
+    /**
+     * Edit action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
+     * @param \App\Entity\Article                       $article           Article entity
+     * @param \App\Repository\ArticleRepository         $articleRepository Article repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/edit/{id}",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="article_edit",
+     * )
+     */
+    public function edit(Request $request, Article $article, ArticleRepository $articleRepository): Response
+    {
+        $form = $this->createForm(ArticleType::class, $article, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $articleRepository->save($article);
+
+            return $this->redirectToRoute('article_index');
+        }
+
+        return $this->render(
+            'article/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'article' => $article,
+            ]
+        );
+    }
 }
