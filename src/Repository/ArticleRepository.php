@@ -59,6 +59,20 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Delete record.
+     *
+     * @param \App\Entity\Article $article Article entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Article $article): void
+    {
+        $this->_em->remove($article);
+        $this->_em->flush($article);
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder

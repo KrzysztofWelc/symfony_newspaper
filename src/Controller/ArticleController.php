@@ -7,6 +7,7 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -124,6 +125,49 @@ class ArticleController extends AbstractController
 
         return $this->render(
             'article/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'article' => $article,
+            ]
+        );
+    }
+
+    /**
+     * Delete action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
+     * @param \App\Entity\Article                       $article           Article entity
+     * @param \App\Repository\ArticleRepository         $articleRepository Article repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/delete/{id}",
+     *     methods={"GET", "DELETE"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="article_delete",
+     * )
+     */
+    public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
+    {
+        $form = $this->createForm(FormType::class, $article, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $articleRepository->delete($article);
+
+            return $this->redirectToRoute('article_index');
+        }
+
+        return $this->render(
+            'article/delete.html.twig',
             [
                 'form' => $form->createView(),
                 'article' => $article,
