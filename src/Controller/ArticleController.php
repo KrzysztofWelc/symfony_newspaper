@@ -84,6 +84,8 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $articleRepository->save($article);
 
+            $this->addFlash('success', 'article created');
+
             return $this->redirectToRoute('article_index');
         }
 
@@ -119,6 +121,9 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $articleRepository->save($article);
+
+            $this->addFlash('success', 'article updated');
+
 
             return $this->redirectToRoute('article_index');
         }
@@ -162,6 +167,9 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $articleRepository->delete($article);
+
+            $this->addFlash('success', 'article deleted');
+
 
             return $this->redirectToRoute('article_index');
         }
