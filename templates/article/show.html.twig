@@ -25,4 +25,13 @@
             {{ form_end(form) }}
         </div>
     </div>
+    <div>
+        {% for comment in article.comments %}
+            <div>
+                <p>{{ comment.nick }}</p>
+                <p>{{ comment.email }}</p>
+                <p>{{ comment.body }}</p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
