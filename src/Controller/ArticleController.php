@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -42,19 +45,42 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @param \App\Entity\Article $article Article entity
+     * Show action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
+     * @param \App\Entity\Article                       $article           Article entity
+     * @param CommentRepository                         $commentRepository Comment repository
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      * @Route(
      *     "/show/{id}",
      *     name="article_show",
+     *     methods={"GET", "POST"}
      * )
      */
-    public function show(Article $article): Response
+    public function show(Request $request, Article $article, CommentRepository $commentRepository): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setArticle($article);
+            $commentRepository->save($comment);
+            //            $this->addFlash('success', 'article created');
+
+            return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
+        }
+
         return $this->render(
             'article/show.html.twig',
-            ['article' => $article]
+            [
+                'article' => $article,
+                'form' => $form->createView(),
+            ]
         );
     }
 
@@ -124,7 +150,6 @@ class ArticleController extends AbstractController
 
             $this->addFlash('success', 'article updated');
 
-
             return $this->redirectToRoute('article_index');
         }
 
@@ -169,7 +194,6 @@ class ArticleController extends AbstractController
             $articleRepository->delete($article);
 
             $this->addFlash('success', 'article deleted');
-
 
             return $this->redirectToRoute('article_index');
         }
