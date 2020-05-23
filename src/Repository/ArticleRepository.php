@@ -52,8 +52,6 @@ class ArticleRepository extends ServiceEntityRepository
      */
     public function save(Article $article): void
     {
-        $article->setCreatedAt(new \DateTime());
-
         $this->_em->persist($article);
         $this->_em->flush($article);
     }

@@ -10,6 +10,7 @@
     <a href="{{ url("article_delete", {"id": article.id}) }}">usuń</a>
     {% if article is defined and article|length %}
         <h1>{{ article.title }}</h1>
+        <p>{{ article.updatedAt|date }}</p>
         <a href={{ url('category_show', {"name": article.category.name}) }}>{{ article.category.name }}</a>
         <p>{{ article.body }}</p>
     {% endif %}

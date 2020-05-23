@@ -20,7 +20,7 @@ class ArticleFixture extends AbstractBaseFixtures implements DependentFixtureInt
             $article = new Article();
             $article->setTitle($this->faker->sentence);
             $article->setBody($this->faker->text(700));
-            $article->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+//            $article->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             $article->setCategory($this->getRandomReference('categories'));
             $this->manager->persist($article);
         }
