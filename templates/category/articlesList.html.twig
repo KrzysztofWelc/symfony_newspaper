@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+    {% if category.articles|length == 0 %}
+        <a href={{ url('category_delete', {"id": category.id}) }}>usuń</a>
+    {% endif %}
     {% if pagination is defined and pagination.items|length %}
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}

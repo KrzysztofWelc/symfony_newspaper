@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Repository\CategoryRepository;
 use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
+     * Index action.
+     *
      * @param \App\Repository\CategoryRepository Category repository
      *
      * @return Symfony\Component\HttpFoundation\Response HTTP response
@@ -34,9 +37,11 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @param Knp\Component\Pager\PaginatorInterface $paginator Paginator interface
-     * @param App\Entity\Category Category entity
-     * @param Symfony\Component\HttpFoundation\Request $request HTTP request
+     * Show action.
+     *
+     * @param Knp\Component\Pager\PaginatorInterface   $paginator Paginator interface
+     * @param App\Entity\Category                      $category  Category entity
+     * @param Symfony\Component\HttpFoundation\Request $request   HTTP request
      *
      * @return Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -44,8 +49,6 @@ class CategoryController extends AbstractController
      */
     public function show(Request $request, Category $category, PaginatorInterface $paginator): Response
     {
-//        dump($category->getArticles()->getTitle);
-
         $pagination = $paginator->paginate(
             $category->getArticles(),
             $request->query->getInt('page', 1),
@@ -54,7 +57,10 @@ class CategoryController extends AbstractController
 
         return $this->render(
             'category/articlesList.html.twig',
-            ['pagination' => $pagination]
+            [
+                'pagination' => $pagination,
+                'category' => $category,
+            ]
         );
     }
 
@@ -90,6 +96,51 @@ class CategoryController extends AbstractController
         return $this->render(
             'category/create.html.twig',
             ['form' => $form->createView()]
+        );
+    }
+
+    /**
+     * Delete action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
+     * @param \App\Entity\Category                      $category           Category entity
+     * @param \App\Repository\CategoryRepository        $categoryRepository Category repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/delete/{id}",
+     *     methods={"GET", "DELETE"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="category_delete",
+     * )
+     */
+    public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    {
+        $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $categoryRepository->delete($category);
+
+            $this->addFlash('success', 'category deleted');
+
+            return $this->redirectToRoute('category_index');
+        }
+
+        return $this->render(
+            'category/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'category' => $category,
+            ]
         );
     }
 }
