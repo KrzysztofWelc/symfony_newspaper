@@ -66,6 +66,20 @@ class Article
      */
     private $updatedAt;
 
+    /**
+     * Code.
+     *
+     * @var string
+     *
+     * @ORM\Column(
+     *     type="string",
+     *     length=255
+     * )
+     *
+     * @Gedmo\Slug(fields={"title"})
+     */
+    private $code;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -163,6 +177,18 @@ class Article
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

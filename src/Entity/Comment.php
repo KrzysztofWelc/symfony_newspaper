@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +38,17 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     * Created at.
+     *
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime")
+     *
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
 
     public function getId(): ?int
     {
@@ -87,6 +99,18 @@ class Comment
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
