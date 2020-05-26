@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ArticleController.
  *
- * @Route("/article")
+ * @Route("/")
  */
 class ArticleController extends AbstractController
 {

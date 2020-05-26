@@ -7,8 +7,11 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% include 'navbar.html.twig' %}
-        <div class="container">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% include 'navbar.html.twig' %}
+        {% endif %}
+        
+        <div class="container mt-4">
             {% block body %}{% endblock %}
         </div>
 
