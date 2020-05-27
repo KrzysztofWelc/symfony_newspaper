@@ -114,9 +114,21 @@ class Article
      */
     private $comments;
 
+    /**
+     * Tags.
+     *
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="articles", orphanRemoval=true)
+     *
+     * @ORM\JoinTable(name="articles_tags")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,6 +235,32 @@ class Article
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
 
         return $this;
     }

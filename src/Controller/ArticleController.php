@@ -23,6 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
     /**
+     * Index action.
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
      * @param \App\Repository\ArticleRepository         $repository Task repository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator  Paginator
