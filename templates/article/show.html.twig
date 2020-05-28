@@ -12,6 +12,13 @@
         <h1>{{ article.title }}</h1>
         <p>{{ article.updatedAt|date }}</p>
         <a href={{ url('category_show', {"name": article.category.name}) }}>{{ article.category.name }}</a>
+        {% if article.tags is defined and article.tags|length %}
+            <div>tags:
+                {% for tag in article.tags %}
+                    <a href={{ url('tag_show', {"code": tag.code}) }}>{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
         <p>{{ article.body }}</p>
     {% endif %}
 

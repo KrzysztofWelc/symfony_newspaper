@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}#{{ tag.code }}{% endblock %}
+
+{% block body %}
+    <h1>tag: {{ tag.name }}</h1>
+
+    {% if tag.articles is defined and tag.articles|length %}
+        {% for article in tag.articles %}
+            <li><a href={{ url('article_show', {"id": article.id})  }}>{{ article.title }}</a></li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
