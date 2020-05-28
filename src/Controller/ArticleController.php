@@ -41,7 +41,7 @@ class ArticleController extends AbstractController
         );
 
         return $this->render(
-            'article/show.html.twig',
+            'article/index.html.twig',
             ['pagination' => $pagination]
         );
     }

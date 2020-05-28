@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{{ url("article_index") }}">wróć</a>
-    <a href="{{ url("article_edit", {"id": article.id}) }}">edutuj</a>
-    <a href="{{ url("article_delete", {"id": article.id}) }}">usuń</a>
     {% if article is defined and article|length %}
+        <a href="{{ url("article_index") }}">wróć</a>
+        <a href="{{ url("article_edit", {"id": article.id}) }}">edutuj</a>
+        <a href="{{ url("article_delete", {"id": article.id}) }}">usuń</a>
+
         <h1>{{ article.title }}</h1>
         <p>{{ article.updatedAt|date }}</p>
         <a href={{ url('category_show', {"name": article.category.name}) }}>{{ article.category.name }}</a>
