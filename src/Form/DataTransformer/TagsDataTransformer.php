@@ -71,7 +71,7 @@ class TagsDataTransformer implements DataTransformerInterface
 
         foreach ($tagTitles as $tagTitle) {
             if ('' !== trim($tagTitle)) {
-                $tag = $this->repository->findOneByTitle(strtolower($tagTitle));
+                $tag = $this->repository->findOneByName(strtolower($tagTitle));
                 if (null == $tag) {
                     $tag = new Tag();
                     $tag->setName($tagTitle);

@@ -32,21 +32,7 @@ class TagRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
-    /**
-     * @param $title
-     *
-     * @return QueryBuilder
-     */
-    public function findOneByTitle($title)
-    {
-        return $this->getOrCreateQueryBuilder()
-            ->select()
-            ->where('tag.name = :val')
-            ->setParameter('val', $title)
-            ->getQuery()
-            ->getResult();
-    }
-
+    
     /**
      * Get or create new query builder.
      *
