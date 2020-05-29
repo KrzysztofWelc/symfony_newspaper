@@ -40,6 +40,7 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setAuthor($this->getUser());
             $comment->setArticle($article);
             $commentRepository->save($comment);
 

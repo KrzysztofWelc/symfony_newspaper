@@ -31,22 +31,6 @@ class CommentType extends AbstractType
     {
         $builder
             ->add(
-                'nick',
-                TextType::class,
-                [
-                    'label' => 'nick',
-                    'required' => true,
-                ]
-            )
-            ->add(
-                'email',
-                TextType::class,
-                [
-                    'label' => 'email',
-                    'required' => true,
-                ]
-            )
-            ->add(
                 'body',
                 TextType::class,
                 [

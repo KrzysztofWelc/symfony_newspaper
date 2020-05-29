@@ -21,30 +21,6 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Type(type="string")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *     min="3",
-     *     max="255",
-     * )
-     */
-    private $nick;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\Type(type="string")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *     min="3",
-     *     max="255",
-     * )
-     */
-    private $email;
-
-    /**
      * @ORM\Column(type="text")
      *
      * @Assert\Type(type="string")
@@ -72,33 +48,15 @@ class Comment
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNick(): ?string
-    {
-        return $this->nick;
-    }
-
-    public function setNick(string $nick): self
-    {
-        $this->nick = $nick;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     public function getBody(): ?string
@@ -133,6 +91,18 @@ class Comment
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
