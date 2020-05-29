@@ -21,16 +21,19 @@
                     <a class="nav-link" href={{ url('category_create') }}>Add category</a>
                 </li>
             {% endif %}
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li>
-                    <div>{{ app.user.email }}</div>
-                    <div>
-                        <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
-                    </div>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="nav-item">
+                    {{ app.user.email }}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('app_logout') }}">log out</a>
                 </li>
             {% else %}
-                <li>
-                    <a href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('app_login') }}">login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('app_register') }}">register</a>
                 </li>
             {% endif %}
         </ul>
