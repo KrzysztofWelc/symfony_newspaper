@@ -23,6 +23,20 @@
         <p>{{ article.body }}</p>
 
         <a class="btn btn-primary" href={{ url('comment_add', {"id": article.id})}} >skomentuj</a>
+
+        <ul class="mt-4 media-list">
+            {% for comment in article.comments %}
+                <li class="media">
+                    <div class="media-body">
+                        <strong class="text-success d-block">{{ comment.nick }}</strong>
+                        <small class="text-muted d-block">{{ comment.email }}</small>
+                        <p class="mt-2">{{ comment.body }}</p>
+                        <hr>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
     {% endif %}
 
 {% endblock %}
