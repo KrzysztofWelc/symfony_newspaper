@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Entity\Comment;
 use App\Form\ArticleType;
-use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -65,23 +63,10 @@ class ArticleController extends AbstractController
      */
     public function show(Request $request, Article $article, CommentRepository $commentRepository): Response
     {
-        $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setArticle($article);
-            $commentRepository->save($comment);
-            //            $this->addFlash('success', 'article created');
-
-            return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
-        }
-
         return $this->render(
             'article/show.html.twig',
             [
                 'article' => $article,
-                'form' => $form->createView(),
             ]
         );
     }

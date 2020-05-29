@@ -21,26 +21,8 @@
             </div>
         {% endif %}
         <p>{{ article.body }}</p>
+
+        <a class="btn btn-primary" href={{ url('comment_add', {"id": article.id})}} >skomentuj</a>
     {% endif %}
 
-    <div class="card mt-5">
-        <div class="card-body">
-            <div class="card-title">dodaj komentarz</div>
-            {{ form_start(form, { method: 'POST', action: url('article_show', {"id": article.id}) }) }}
-            {{ form_widget(form) }}
-            <div class="form-group row float-sm-right">
-                <input type="submit" value="zapisz" class="btn btn-primary" />
-            </div>
-            {{ form_end(form) }}
-        </div>
-    </div>
-    <div>
-        {% for comment in article.comments %}
-            <div>
-                <p>{{ comment.nick }}</p>
-                <p>{{ comment.email }}</p>
-                <p>{{ comment.body }}</p>
-            </div>
-        {% endfor %}
-    </div>
 {% endblock %}
