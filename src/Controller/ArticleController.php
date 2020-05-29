@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Class ArticleController.
@@ -87,6 +88,8 @@ class ArticleController extends AbstractController
      *     methods={"GET", "POST"},
      *     name="article_create",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request, ArticleRepository $articleRepository): Response
     {
@@ -128,6 +131,8 @@ class ArticleController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="article_edit",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
@@ -169,6 +174,9 @@ class ArticleController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="article_delete",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("DELETE", subject="article")
      */
     public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {

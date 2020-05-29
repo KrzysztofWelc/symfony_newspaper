@@ -7,9 +7,10 @@
 {% block body %}
     {% if article is defined and article|length %}
         <a href="{{ url("article_index") }}">wróć</a>
-        <a href="{{ url("article_edit", {"id": article.id}) }}">edutuj</a>
-        <a href="{{ url("article_delete", {"id": article.id}) }}">usuń</a>
-
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ url("article_edit", {"id": article.id}) }}">edutuj</a>
+            <a href="{{ url("article_delete", {"id": article.id}) }}">usuń</a>
+        {% endif %}
         <h1>{{ article.title }}</h1>
         <strong class="text-primary d-block">{{ article.author.email }}</strong>
         <small class="text-muted d-block">{{ article.updatedAt|date }}</small>
@@ -23,7 +24,11 @@
         {% endif %}
         <p>{{ article.body }}</p>
 
-        <a class="btn btn-primary" href={{ url('comment_add', {"id": article.id})}} >skomentuj</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a class="btn btn-primary" href={{ url('comment_add', {"id": article.id})}} >skomentuj</a>
+        {% else %}
+            <div class="alert alert-info">zaloguj się, żeby komentować</div>
+        {% endif %}
 
         {% if article.comments|length %}
             <ul class="mt-4 media-list">

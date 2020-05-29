@@ -8,15 +8,19 @@
             <li class="nav-item active">
                 <a class="nav-link" href={{ url('article_index') }}>Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href={{ url('article_create') }}>Add article</a>
-            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href={{ url('article_create') }}>Add article</a>
+                </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href={{ url('category_index') }}>Categories</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href={{ url('category_create') }}>Add category</a>
-            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href={{ url('category_create') }}>Add category</a>
+                </li>
+            {% endif %}
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li>
                     <div>{{ app.user.email }}</div>
