@@ -23,7 +23,7 @@
             {% endif %}
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="nav-item">
-                    {{ app.user.email }}
+                    <a class="nav-link" href={{ url('user_profile', {"id": app.user.id}) }}>{{ app.user.email }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('app_logout') }}">log out</a>

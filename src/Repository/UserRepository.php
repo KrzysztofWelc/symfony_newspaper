@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,9 +18,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * Password encoder.
+     *
+     * @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
+
+    public function __construct(ManagerRegistry $registry, UserPasswordEncoderInterface $passwordEncoder)
     {
         parent::__construct($registry, User::class);
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
@@ -35,6 +44,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
 
     /**
      * @param User $user user entity
