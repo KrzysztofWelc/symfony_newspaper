@@ -7,9 +7,12 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Comment controller.
@@ -52,6 +55,50 @@ class CommentController extends AbstractController
             [
                 'id' => $article->getId(),
                 'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @param Comment $comment
+     * @param CommentRepository $commentRepository
+     *
+     * @return Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/delete/{id}",
+     *     name="comment_delete",
+     *     methods={"GET", "DELETE"}
+     *     )
+     *
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('DELETE', comment)")
+     */
+    public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    {
+        $form = $this->createForm(FormType::class, $comment, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentRepository->delete($comment);
+
+            $this->addFlash('success', 'comment deleted');
+
+            return $this->redirectToRoute('article_index');
+        }
+
+        return $this->render(
+            'comment/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'comment' => $comment,
             ]
         );
     }

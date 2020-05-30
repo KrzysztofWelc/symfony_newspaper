@@ -2,16 +2,16 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Article;
+use App\Entity\Comment;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * Class ArticleVoter.
+ * Class CommentVoter.
  */
-class ArticleVoter extends Voter
+class CommentVoter extends Voter
 {
     /**
      * Security helper.
@@ -41,7 +41,7 @@ class ArticleVoter extends Voter
     protected function supports($attribute, $subject)
     {
         return in_array($attribute, ['VIEW', 'EDIT', 'DELETE'])
-            && $subject instanceof Article;
+            && $subject instanceof Comment;
     }
 
     /**
@@ -72,7 +72,7 @@ class ArticleVoter extends Voter
                 if ($subject->getAuthor() === $user) {
                     return true;
                 }
-            break;
+                break;
             case 'DELETE':
                 if ($subject->getAuthor() === $user) {
                     return true;

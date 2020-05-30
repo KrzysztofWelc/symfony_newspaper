@@ -37,6 +37,9 @@
                         <div class="media-body">
                             <strong class="text-success d-block">{{ comment.author.email }}</strong>
                             <p class="mt-2">{{ comment.body }}</p>
+                            {% if is_granted("ROLE_ADMIN") or is_granted("DELETE", comment) %}
+                                <a class="btn btn-outline-danger float-right" href={{ url('comment_delete', {"id": comment.id}) }}>delete</a>
+                            {% endif %}
                             <hr>
                         </div>
                     </li>

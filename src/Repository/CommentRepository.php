@@ -32,4 +32,18 @@ class CommentRepository extends ServiceEntityRepository
         $this->_em->persist($comment);
         $this->_em->flush($comment);
     }
+
+    /**
+     * Delete record.
+     *
+     * @param \App\Entity\Comment $comment Comment entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Comment $comment): void
+    {
+        $this->_em->remove($comment);
+        $this->_em->flush($comment);
+    }
 }
