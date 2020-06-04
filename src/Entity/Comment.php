@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use DateTimeInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -31,7 +31,6 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $article;
 

@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -82,6 +83,8 @@ class User implements UserInterface
      * @var string The hashed password
      *
      * @ORM\Column(type="string")
+     *
+     * @SecurityAssert\UserPassword()
      */
     private $password;
 
@@ -189,6 +192,4 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
-
 }

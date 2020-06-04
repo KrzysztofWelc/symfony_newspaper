@@ -7,12 +7,12 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * Class ArticleController.
@@ -29,6 +29,7 @@ class ArticleController extends AbstractController
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator  Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
      * @Route("/", name="article_index")
      */
     public function index(Request $request, ArticleRepository $repository, PaginatorInterface $paginator): Response
@@ -56,6 +57,7 @@ class ArticleController extends AbstractController
      * @throws \Doctrine\ORM\OptimisticLockException
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
      * @Route(
      *     "/show/{id}",
      *     name="article_show",

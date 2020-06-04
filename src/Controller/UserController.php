@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangePasswordType;
 use App\Form\CredentialsType;
-use App\Form\PasswordChangeType;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,13 +34,9 @@ class UserController extends AbstractController
     /**
      * Change email action.
      *
-     * @param Request $request
-     * @param UserRepository $userRepository
-     *
-     * @return Response
-     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     *
      * @Route(
      *     "/change_email",
      *     name="user_email_change",
@@ -67,4 +63,40 @@ class UserController extends AbstractController
         );
     }
 
+    /**
+     * @param Request $request
+     * @param UserRepository $userRepository
+     *
+     * @return Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/change_password",
+     *     name="user_password_change",
+     *     methods={"GET", "PUT"}
+     * )
+     */
+    public function changePassword(Request $request, UserRepository $userRepository): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ChangePasswordType::class, $user, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newPassword = $form->get('newPassword')->getData();
+            dump($newPassword);
+            $userRepository->setNewPassword($user, $newPassword);
+
+            $this->addFlash('success', 'password has been hanged');
+
+            return $this->redirectToRoute('user_profile', ['id' => $user->getId()]);
+        }
+
+        return $this->render(
+            'user/changePassword.html.twig',
+            ['form' => $form->createView()]
+        );
+    }
 }

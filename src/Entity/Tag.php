@@ -117,7 +117,6 @@ class Tag
     public function setName(string $name): void
     {
         $this->name = $name;
-
     }
 
     /**
@@ -174,6 +173,5 @@ class Tag
     public function setCode(string $code): void
     {
         $this->code = $code;
-
     }
 }

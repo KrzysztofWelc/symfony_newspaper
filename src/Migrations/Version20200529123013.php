@@ -12,15 +12,15 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200529123013 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE articles CHANGE author_id author_id INT UNSIGNED NOT NULL');
         $this->addSql('ALTER TABLE comment ADD author_id INT UNSIGNED NOT NULL');
@@ -28,10 +28,10 @@ final class Version20200529123013 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_9474526CF675F31B ON comment (author_id)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE articles CHANGE author_id author_id INT UNSIGNED DEFAULT NULL');
         $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526CF675F31B');

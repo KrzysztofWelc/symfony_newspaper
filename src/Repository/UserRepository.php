@@ -45,6 +45,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * @param UserInterface $user
+     * @param string $newPassword non encoded password
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function setNewPassword(UserInterface $user, string $newPassword): void{
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        $encodedPassword = $this->passwordEncoder->encodePassword($newPassword);
+
+        $user->setPassword($encodedPassword);
+        $this->_em->persist($user);
+        $this->_em->flush();
+    }
 
     /**
      * @param User $user user entity

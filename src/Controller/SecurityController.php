@@ -35,9 +35,9 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @param Request $request HTTP request
+     * @param Request                      $request         HTTP request
      * @param UserPasswordEncoderInterface $passwordEncoder Password encoder
-     * @param UserRepository $userRepository User repository
+     * @param UserRepository               $userRepository  User repository
      *
      * @return Response HTTP response
      *
@@ -79,6 +79,7 @@ class SecurityController extends AbstractController
      * Logout action.
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse HTTP response
+     *
      * @Route("/logout", name="app_logout")
      */
     public function logout()
@@ -86,6 +87,4 @@ class SecurityController extends AbstractController
 //        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
         return $this->redirectToRoute('app_login');
     }
-
-
 }

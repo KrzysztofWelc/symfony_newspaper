@@ -6,13 +6,12 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Comment controller.
@@ -60,12 +59,6 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @param Comment $comment
-     * @param CommentRepository $commentRepository
-     *
-     * @return Response
-     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *

@@ -35,7 +35,6 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="category")
-     *
      */
     private $articles;
 
