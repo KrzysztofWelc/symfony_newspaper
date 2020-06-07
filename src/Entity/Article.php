@@ -135,6 +135,11 @@ class Article
      */
     private $author;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Thumbnail::class, mappedBy="article", cascade={"persist", "remove"})
+     */
+    private $thumbnail;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -283,6 +288,23 @@ class Article
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?Thumbnail
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(Thumbnail $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        // set the owning side of the relation if necessary
+        if ($thumbnail->getArticle() !== $this) {
+            $thumbnail->setArticle($this);
+        }
 
         return $this;
     }

@@ -11,9 +11,11 @@ use App\Entity\Tag;
 use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 
 /**
  * Class ArticleType.
@@ -65,6 +67,26 @@ class ArticleType extends AbstractType
             [
                 'label' => 'Body',
                 'required' => true,
+            ]
+        );
+        $builder->add(
+            'file',
+            FileType::class,
+            [
+                'mapped' => false,
+                'label' => 'label_avatar',
+                'constraints' => new Image(
+                    [
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                            'image/pjpeg',
+                            'image/jpeg',
+                            'image/pjpeg',
+                        ],
+                    ]
+                ),
             ]
         );
         $builder->add(

@@ -141,6 +141,12 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.3"
     },
+    "league/commonmark": {
+        "version": "1.4.3"
+    },
+    "league/commonmark-ext-inlines-only": {
+        "version": "v1.1.0"
+    },
     "monolog/monolog": {
         "version": "1.25.3"
     },
