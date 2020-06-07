@@ -35,47 +35,6 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @param Request $request HTTP request
-     * @param UserPasswordEncoderInterface $passwordEncoder Password encoder
-     * @param UserRepository $userRepository User repository
-     *
-     * @return Response HTTP response
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     *
-     * @Route("/register", name="app_register")
-     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-//            encode password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $user->getPassword()
-                )
-            );
-            $user->setRoles([User::ROLE_USER]);
-
-            $userRepository->save($user);
-
-            $this->addFlash('success', 'You have been signed up!');
-
-            return $this->redirectToRoute('article_index');
-        }
-
-        return $this->render(
-            'security/register.html.twig',
-            ['form' => $form->createView()]
-        );
-    }
-
-    /**
      * Logout action.
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse HTTP response
