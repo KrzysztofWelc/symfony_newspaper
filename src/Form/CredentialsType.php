@@ -1,6 +1,6 @@
 <?php
 /**
- * Article type.
+ * Credentials type.
  */
 
 namespace App\Form;

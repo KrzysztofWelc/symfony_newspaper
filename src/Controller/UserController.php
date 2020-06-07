@@ -27,6 +27,7 @@ class UserController extends AbstractController
 
     /**
      * UserController constructor.
+     *
      * @param UserService $service user service
      */
     public function __construct(UserService $service)
@@ -49,10 +50,7 @@ class UserController extends AbstractController
     /**
      * Change email action.
      *
-     * @param Request $request
      * @param UserRepository $userRepository
-     *
-     * @return Response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -82,4 +80,37 @@ class UserController extends AbstractController
         );
     }
 
+    /**
+     * @param Request $request HTTP request
+     *
+     * @return Response
+     *
+     * @Route(
+     *     "/change_password",
+     *     name="user_password_change",
+     *     methods={"GET", "PUT"}
+     * )
+     */
+    public function changePassword(Request $request): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(PasswordChangeType::class, $user, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $oldPassword = $form->get('oldPassword')->getData();
+            $newPassword = $form->get('newPassword')->getData();
+
+            $this->userService->changePassowrd($user, $oldPassword, $newPassword);
+
+            $this->addFlash('success', 'password has been changed');
+
+            return $this->redirectToRoute('user_profile', ['id' => $this->getUser()->getId()]);
+        }
+
+        return $this->render(
+            'user/changePassword.html.twig',
+            ['form' => $form->createView()]
+        );
+    }
 }
