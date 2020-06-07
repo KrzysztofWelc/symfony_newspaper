@@ -19,6 +19,17 @@ class ThumbnailRepository extends ServiceEntityRepository
         parent::__construct($registry, Thumbnail::class);
     }
 
+    /**
+     * @param Thumbnail $thumbnail Thumbnail entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Thumbnail $thumbnail): void
+    {
+        $this->_em->persist($thumbnail);
+        $this->_em->flush($thumbnail);
+    }
     // /**
     //  * @return Thumbnail[] Returns an array of Thumbnail objects
     //  */

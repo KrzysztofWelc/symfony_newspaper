@@ -22,6 +22,9 @@
                 {% endfor %}
             </div>
         {% endif %}
+        {% if article.thumbnail.filename is defined and article.thumbnail.filename|length %}
+            <img src="{{ asset('uploads/thumbnails/' ~ article.thumbnail.filename) }}">
+        {% endif %}
         <p>{{ article.body }}</p>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}

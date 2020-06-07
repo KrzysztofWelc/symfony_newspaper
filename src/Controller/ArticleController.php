@@ -105,7 +105,9 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->articleService->save($article, $this->getUser());
+            $imageData = $form->get('file')->getData();
+            $image = isset($imageData) ? $imageData : null;
+            $this->articleService->save($article, $this->getUser(), $image);
             $this->addFlash('success', 'article created');
 
             return $this->redirectToRoute('article_index');
