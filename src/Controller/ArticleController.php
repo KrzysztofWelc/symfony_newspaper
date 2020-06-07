@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Service\ArticleService;
 
 /**
  * Class ArticleController.
@@ -22,35 +23,42 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class ArticleController extends AbstractController
 {
     /**
+     * @var App\Service\ArticleService Article Service
+     */
+    private $articleService;
+
+    /**
+     * ArticleController constructor.
+     *
+     * @param ArticleService $articleService
+     */
+    public function __construct(ArticleService $articleService)
+    {
+        $this->articleService = $articleService;
+    }
+
+    /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\ArticleRepository         $repository Task repository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator  Paginator
+     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request.
+     * @param \App\Repository\ArticleRepository         $repository Task repository.
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response.
+     *
      * @Route("/", name="article_index")
      */
-    public function index(Request $request, ArticleRepository $repository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $repository->queryAll(),
-            $request->query->getInt('page', 1),
-            ArticleRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
-
         return $this->render(
             'article/index.html.twig',
-            ['pagination' => $pagination]
+            ['pagination' => $this->articleService->createPaginatedList($request->query->getInt('page', 1))]
         );
     }
 
     /**
      * Show action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
      * @param \App\Entity\Article                       $article           Article entity
-     * @param CommentRepository                         $commentRepository Comment repository
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -62,7 +70,7 @@ class ArticleController extends AbstractController
      *     methods={"GET", "POST"}
      * )
      */
-    public function show(Request $request, Article $article, CommentRepository $commentRepository): Response
+    public function show(Article $article): Response
     {
         return $this->render(
             'article/show.html.twig',
@@ -76,7 +84,6 @@ class ArticleController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Repository\ArticleRepository         $articleRepository Article repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -91,17 +98,14 @@ class ArticleController extends AbstractController
      *
      * @IsGranted("ROLE_ADMIN")
      */
-    public function create(Request $request, ArticleRepository $articleRepository): Response
+    public function create(Request $request): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $article->setAuthor($this->getUser());
-
-            $articleRepository->save($article);
-
+            $this->articleService->save($article, $this->getUser());
             $this->addFlash('success', 'article created');
 
             return $this->redirectToRoute('article_index');
@@ -118,7 +122,6 @@ class ArticleController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
      * @param \App\Entity\Article                       $article           Article entity
-     * @param \App\Repository\ArticleRepository         $articleRepository Article repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -134,13 +137,13 @@ class ArticleController extends AbstractController
      *
      * @IsGranted("ROLE_ADMIN")
      */
-    public function edit(Request $request, Article $article, ArticleRepository $articleRepository): Response
+    public function edit(Request $request, Article $article): Response
     {
         $form = $this->createForm(ArticleType::class, $article, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $articleRepository->save($article);
+            $this->articleService->save($article, null);
 
             $this->addFlash('success', 'article updated');
 
@@ -161,7 +164,6 @@ class ArticleController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
      * @param \App\Entity\Article                       $article           Article entity
-     * @param \App\Repository\ArticleRepository         $articleRepository Article repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -178,7 +180,7 @@ class ArticleController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @IsGranted("DELETE", subject="article")
      */
-    public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
+    public function delete(Request $request, Article $article): Response
     {
         $form = $this->createForm(FormType::class, $article, ['method' => 'DELETE']);
         $form->handleRequest($request);
@@ -188,8 +190,7 @@ class ArticleController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $articleRepository->delete($article);
-
+            $this->articleService->delete($article);
             $this->addFlash('success', 'article deleted');
 
             return $this->redirectToRoute('article_index');

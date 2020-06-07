@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
-use App\Repository\CategoryRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Service\CategoryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,26 +20,38 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class CategoryController extends AbstractController
 {
     /**
-     * Index action.
+     * @var App\Service\CategoryService
+     */
+    private $categoryService;
+
+    /**
+     * CategoryController constructor.
      *
-     * @param \App\Repository\CategoryRepository Category repository
+     * @param CategoryService $categoryService Category service
+     */
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
+    /**
+     * Index action.
      *
      * @return Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route("/", name="category_index")
      */
-    public function index(CategoryRepository $repository): Response
+    public function index(): Response
     {
         return $this->render(
             'category/index.html.twig',
-            ['categories' => $repository->findAll()]
+            ['categories' => $this->categoryService->createList()]
         );
     }
 
     /**
      * Show action.
      *
-     * @param Knp\Component\Pager\PaginatorInterface   $paginator Paginator interface
      * @param App\Entity\Category                      $category  Category entity
      * @param Symfony\Component\HttpFoundation\Request $request   HTTP request
      *
@@ -48,12 +59,11 @@ class CategoryController extends AbstractController
      *
      * @Route("/show/{name}", name="category_show")
      */
-    public function show(Request $request, Category $category, PaginatorInterface $paginator): Response
+    public function show(Request $request, Category $category): Response
     {
-        $pagination = $paginator->paginate(
-            $category->getArticles(),
-            $request->query->getInt('page', 1),
-            3
+        $pagination = $this->categoryService->createPaginatedListOfArticles(
+            $category,
+            $request->query->getInt('page', 1)
         );
 
         return $this->render(
@@ -69,7 +79,6 @@ class CategoryController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Repository\CategoryRepository        $categoryRepository Category repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -84,14 +93,14 @@ class CategoryController extends AbstractController
      *
      * @isGranted("ROLE_ADMIN")
      */
-    public function create(Request $request, CategoryRepository $categoryRepository): Response
+    public function create(Request $request): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categoryRepository->save($category);
+            $this->categoryService->save($category);
 
             return $this->redirectToRoute('category_index');
         }
@@ -107,7 +116,6 @@ class CategoryController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
      * @param \App\Entity\Category                      $category           Category entity
-     * @param \App\Repository\CategoryRepository        $categoryRepository Category repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -123,7 +131,7 @@ class CategoryController extends AbstractController
      *
      * @isGranted("ROLE_ADMIN")
      */
-    public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    public function delete(Request $request, Category $category): Response
     {
         $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
         $form->handleRequest($request);
@@ -133,8 +141,7 @@ class CategoryController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categoryRepository->delete($category);
-
+            $this->categoryService->delete($category);
             $this->addFlash('success', 'category deleted');
 
             return $this->redirectToRoute('category_index');
@@ -154,7 +161,6 @@ class CategoryController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
      * @param \App\Entity\Category                      $category           Article entity
-     * @param \App\Repository\CategoryRepository        $categoryRepository Category repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -170,14 +176,13 @@ class CategoryController extends AbstractController
      *
      * @isGranted("ROLE_ADMIN")
      */
-    public function edit(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(CategoryType::class, $category, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categoryRepository->save($category);
-
+            $this->categoryService->save($category);
             $this->addFlash('success', 'category updated');
 
             return $this->redirectToRoute('category_index');

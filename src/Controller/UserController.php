@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\CredentialsType;
 use App\Form\PasswordChangeType;
 use App\Repository\UserRepository;
+use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +20,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserController extends AbstractController
 {
+    /**
+     * @var App\Service\UserService
+     */
+    private $userService;
+
+    /**
+     * UserController constructor.
+     * @param UserService $service user service
+     */
+    public function __construct(UserService $service)
+    {
+        $this->userService = $service;
+    }
+
     /**
      * Profile action.
      *
@@ -47,14 +62,14 @@ class UserController extends AbstractController
      *     methods={"GET", "PUT"}
      * )
      */
-    public function changeEmail(Request $request, UserRepository $userRepository): Response
+    public function changeEmail(Request $request): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(CredentialsType::class, $user, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->save($user);
+            $this->userService->save($user);
 
             $this->addFlash('success', 'email has been hanged');
 
