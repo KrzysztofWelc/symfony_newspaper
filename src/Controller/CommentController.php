@@ -49,6 +49,8 @@ class CommentController extends AbstractController
      *     name="comment_add",
      *     methods={"GET", "POST"}
      *     )
+     *
+     * @isGranted("IS_AUTHENTICATED_FULLY")
      */
     public function add(Request $request, Article $article): Response
     {

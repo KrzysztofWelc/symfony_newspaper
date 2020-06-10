@@ -180,7 +180,6 @@ class ArticleController extends AbstractController
      * )
      *
      * @IsGranted("ROLE_ADMIN")
-     * @IsGranted("DELETE", subject="article")
      */
     public function delete(Request $request, Article $article): Response
     {

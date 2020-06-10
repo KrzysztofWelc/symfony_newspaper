@@ -83,8 +83,6 @@ class UserController extends AbstractController
     /**
      * @param Request $request HTTP request
      *
-     * @return Response
-     *
      * @Route(
      *     "/change_password",
      *     name="user_password_change",
@@ -101,11 +99,13 @@ class UserController extends AbstractController
             $oldPassword = $form->get('oldPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();
 
-            $this->userService->changePassowrd($user, $oldPassword, $newPassword);
+            $status = $this->userService->changePassowrd($user, $oldPassword, $newPassword);
+            $flashType = $status ? 'success' : 'danger';
+            $flashMsg = $status ? 'password has been changed' : 'wrong current password';
 
-            $this->addFlash('success', 'password has been changed');
+            $this->addFlash($flashType, $flashMsg);
 
-            return $this->redirectToRoute('user_profile', ['id' => $this->getUser()->getId()]);
+            return $this->redirectToRoute('user_profile', ['id' => $user->getId()]);
         }
 
         return $this->render(

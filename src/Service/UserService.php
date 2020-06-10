@@ -53,8 +53,10 @@ class UserService
      * @param User   $user User entity
      * @param string $old  old password
      * @param string $new  new password
+     *
+     * @return bool success status
      */
-    public function changePassowrd(User $user, string $old, string $new): void
+    public function changePassowrd(User $user, string $old, string $new): bool
     {
         $pwdCheck = $this->passwordEncoder->isPasswordValid($user, $old);
 
@@ -62,6 +64,10 @@ class UserService
             $newEncodedPwd = $this->passwordEncoder->encodePassword($user, $new);
             $user->setPassword($newEncodedPwd);
             $this->save($user);
+
+            return true;
         }
+
+        return false;
     }
 }
