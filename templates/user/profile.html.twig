@@ -8,13 +8,13 @@
    <table class="table">
         <tr>
             <td>email</td>
-            <td>{{ app.user.email }}</td>
-            <td><a href={{ url('user_email_change') }}>change</a></td>
+            <td>{{ user.email }}</td>
+            <td><a href={{ url('user_email_change', {'id': user.id}) }}>change</a></td>
         </tr>
        <tr>
             <td>password</td>
             <td>secret</td>
-            <td><a href={{ url('user_password_change') }}>change</a></td>
+            <td><a href={{ url('user_password_change', {'id': user.id}) }}>change</a></td>
         </tr>
    </table>
 {% endblock %}

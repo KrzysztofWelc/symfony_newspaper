@@ -9,7 +9,7 @@
         <div class="card-body">
             <div class="card-title">change email</div>
 
-            {{ form_start(form, { method: 'PUT', action: url('user_email_change') }) }}
+            {{ form_start(form, { method: 'PUT', action: url('user_email_change', {'id': id}) }) }}
             {{ form_widget(form) }}
             <div class="form-group row float-sm-right">
                 <input type="submit" value="zapisz" class="btn btn-primary" />
