@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AdminPwdChangeType;
 use App\Form\CredentialsType;
 use App\Form\PasswordChangeType;
-use App\Repository\UserRepository;
 use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,8 +46,6 @@ class UserController extends AbstractController
      */
     public function profile(User $usr): Response
     {
-        dump($usr);
-
         return $this->render(
             'user/profile.html.twig',
             ['user' => $usr]
@@ -100,7 +98,7 @@ class UserController extends AbstractController
      * @param User    $usr     User entity
      *
      * @Route(
-     *     "/change_password/{id}",
+     *     "/user_change_password/{id}",
      *     name="user_password_change",
      *     methods={"GET", "PUT"}
      * )
@@ -109,14 +107,18 @@ class UserController extends AbstractController
      */
     public function changePassword(Request $request, User $usr): Response
     {
-        $form = $this->createForm(PasswordChangeType::class, $usr, ['method' => 'PUT']);
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+        $type = $isAdmin ? AdminPwdChangeType::class : PasswordChangeType::class;
+        $form = $this->createForm($type, $usr, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $oldPassword = $form->get('oldPassword')->getData();
+            $oldPassword = $isAdmin ? null : $form->get('oldPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();
+            dump($usr);
 
-            $status = $this->userService->changePassowrd($usr, $oldPassword, $newPassword);
+            $status = $this->userService->changePassword($isAdmin, $usr, $newPassword, $oldPassword);
             $flashType = $status ? 'success' : 'danger';
             $flashMsg = $status ? 'password has been changed' : 'wrong current password';
 

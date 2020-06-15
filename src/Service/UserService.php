@@ -48,26 +48,38 @@ class UserService
     }
 
     /**
-     * Change passoword.
+     * Change password.
      *
-     * @param User   $user User entity
-     * @param string $old  old password
-     * @param string $new  new password
+     * @param bool   $isAdmin User status
+     * @param User   $user    User entity
+     * @param string $new     new password
+     * @param string $old     old password
      *
      * @return bool success status
      */
-    public function changePassowrd(User $user, string $old, string $new): bool
+    public function changePassword(bool $isAdmin, User $user, string $new, ?string $old): bool
     {
-        $pwdCheck = $this->passwordEncoder->isPasswordValid($user, $old);
-
-        if ($pwdCheck) {
+        $success = false;
+        if ($isAdmin) {
+//            admin change password procedure
             $newEncodedPwd = $this->passwordEncoder->encodePassword($user, $new);
             $user->setPassword($newEncodedPwd);
             $this->save($user);
 
-            return true;
+            $success = true;
+        } else {
+//            standard user change password procedure
+            $pwdCheck = $this->passwordEncoder->isPasswordValid($user, $old);
+
+            if ($pwdCheck) {
+                $newEncodedPwd = $this->passwordEncoder->encodePassword($user, $new);
+                $user->setPassword($newEncodedPwd);
+                $this->save($user);
+
+                $success = true;
+            }
         }
 
-        return false;
+        return $success;
     }
 }
