@@ -1,24 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    add comment
+    {{ 'comment_add'|trans }}
 {% endblock %}
 
 {% block body %}
     <div class="card mt-5">
         <div class="card-body">
-            <div class="card-title">dodaj komentarz</div>
+            <div class="card-title"><h2>{{ 'comment_add'|trans }}</h2></div>
 
             {{ form_start(form, { method: 'POST', action: url('comment_add', {"id": id}) }) }}
             {{ form_widget(form) }}
             <div class="form-group row float-sm-right">
-                <input type="submit" value="zapisz" class="btn btn-primary" />
+                <input type="submit" value="{{ 'comment_add'|trans }}" class="btn btn-primary" />
             </div>
-{#            <div class="form-group row float-sm-left">#}
-{#                <a href="{{ url('category_index') }}" class="btn btn-link">#}
-{#                    wróć#}
-{#                </a>#}
-{#            </div>#}
+
             {{ form_end(form) }}
 
         </div>

@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    delete
+    {{ 'categories_delete'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>usuń</h1>
+    <h1>{{ 'categories_delete'|trans }}</h1>
     {{ form_start(form, { method: 'DELETE', action: url('category_delete', {id: category.id}) }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">
-        <input type="submit" value="usun" class="btn btn-primary" />
+        <input type="submit" value="{{ 'categories_delete'|trans }}" class="btn btn-primary" />
     </div>
     <div class="form-group row float-sm-left">
         <a href="{{ url('category_index') }}" class="btn btn-link">
-            wróc
+            {{ 'categories_delete'|trans }}
         </a>
     </div>
     {{ form_end(form) }}

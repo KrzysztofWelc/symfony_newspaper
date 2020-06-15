@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <!--    Categories        -->
+            <trans-unit id="categories">
+                <source>categories</source>
+                <target>Kategorie</target>
+            </trans-unit>
+            <trans-unit id="category">
+                <source>category</source>
+                <target>Kategoria</target>
+            </trans-unit>
+            <trans-unit id="categories_add">
+                <source>categories_add</source>
+                <target>Dodaj kategorię</target>
+            </trans-unit>
+            <trans-unit id="categories_delete">
+                <source>categories_delete</source>
+                <target>Usuń kategorię</target>
+            </trans-unit>
+            <trans-unit id="categories_edit">
+                <source>categories_edit</source>
+                <target>Edytuj kategorię</target>
+            </trans-unit>
+            <!--    Articles        -->
+            <trans-unit id="articles">
+                <source>articles</source>
+                <target>Artykuł</target>
+            </trans-unit>
+            <trans-unit id="article">
+                <source>article</source>
+                <target>Artykuł</target>
+            </trans-unit>
+            <trans-unit id="article_add">
+                <source>article_add</source>
+                <target>Dodaj artykuł</target>
+            </trans-unit>
+            <trans-unit id="article_delete">
+                <source>article_delete</source>
+                <target>Usuń artykuł</target>
+            </trans-unit>
+            <trans-unit id="article_edit">
+                <source>article_edit</source>
+                <target>Edytuj artykuł</target>
+            </trans-unit>
+            <!--    Auth        -->
+            <trans-unit id="nav_login">
+                <source>nav_login</source>
+                <target>Zaloguj się</target>
+            </trans-unit>
+            <trans-unit id="nav_register">
+                <source>nav_register</source>
+                <target>Zarejestruj się</target>
+            </trans-unit>
+            <trans-unit id="nav_logout">
+                <source>nav_logout</source>
+                <target>Wyloguj</target>
+            </trans-unit>
+            <trans-unit id="email_change">
+                <source>email_change</source>
+                <target>Zmień email</target>
+            </trans-unit><trans-unit id="password_change">
+                <source>password_change</source>
+                <target>Zmień password</target>
+            </trans-unit>
+            <!--    General        -->
+            <trans-unit id="back">
+                <source>back</source>
+                <target>wróć</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>delete</source>
+                <target>usuń</target>
+            </trans-unit>
+            <trans-unit id="change">
+                <source>change</source>
+                <target>zmień</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>hasło</target>
+            </trans-unit>
+            <trans-unit id="secret">
+                <source>secret</source>
+                <target>sekret</target>
+            </trans-unit>
+            <!--    Comment        -->
+            <trans-unit id="comment">
+                <source>comment</source>
+                <target>komentuj</target>
+            </trans-unit>
+            <trans-unit id="comment_add">
+                <source>comment_add</source>
+                <target>Dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id="comment_delete">
+                <source>comment_delete</source>
+                <target>Usuń komentarz</target>
+            </trans-unit>
+            <trans-unit id="login_to_comment">
+                <source>login_to_comment</source>
+                <target>Zaloguj się, żeby komentować.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

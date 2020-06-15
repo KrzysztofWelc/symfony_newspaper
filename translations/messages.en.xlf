@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+<!--    Categories        -->
+            <trans-unit id="categories">
+                <source>categories</source>
+                <target>Categories</target>
+            </trans-unit>
+            <trans-unit id="category">
+                <source>category</source>
+                <target>Category</target>
+            </trans-unit>
+            <trans-unit id="categories_add">
+                <source>categories_add</source>
+                <target>Add category</target>
+            </trans-unit>
+            <trans-unit id="categories_delete">
+                <source>categories_delete</source>
+                <target>Delete category</target>
+            </trans-unit>
+            <trans-unit id="categories_edit">
+                <source>categories_edit</source>
+                <target>Edit category</target>
+            </trans-unit>
+<!--    Articles        -->
+            <trans-unit id="articles">
+                <source>articles</source>
+                <target>Articles</target>
+            </trans-unit>
+            <trans-unit id="article">
+                <source>article</source>
+                <target>Article</target>
+            </trans-unit>
+            <trans-unit id="article_add">
+                <source>article_add</source>
+                <target>Add article</target>
+            </trans-unit>
+            <trans-unit id="article_delete">
+                <source>article_delete</source>
+                <target>Delete article</target>
+            </trans-unit>
+            <trans-unit id="article_edit">
+                <source>article_edit</source>
+                <target>Edit article</target>
+            </trans-unit>
+<!--    Auth        -->
+            <trans-unit id="nav_login">
+                <source>nav_login</source>
+                <target>Log in</target>
+            </trans-unit>
+            <trans-unit id="nav_register">
+                <source>nav_register</source>
+                <target>Sign up</target>
+            </trans-unit>
+            <trans-unit id="nav_logout">
+                <source>nav_logout</source>
+                <target>Log out</target>
+            </trans-unit>
+            <trans-unit id="email_change">
+                <source>email_change</source>
+                <target>Change email</target>
+            </trans-unit><trans-unit id="password_change">
+                <source>password_change</source>
+                <target>Change password</target>
+            </trans-unit>
+<!--    General        -->
+            <trans-unit id="back">
+                <source>back</source>
+                <target>back</target>
+            </trans-unit>
+            <trans-unit id="delete">
+                <source>delete</source>
+                <target>delete</target>
+            </trans-unit>
+            <trans-unit id="change">
+                <source>change</source>
+                <target>Change</target>
+            </trans-unit>
+            <trans-unit id="password">
+                <source>password</source>
+                <target>password</target>
+            </trans-unit>
+            <trans-unit id="secret">
+                <source>secret</source>
+                <target>secret</target>
+            </trans-unit>
+<!--    Comment        -->
+            <trans-unit id="comment">
+                <source>comment</source>
+                <target>comment</target>
+            </trans-unit>
+            <trans-unit id="comment_add">
+                <source>comment_add</source>
+                <target>Add comment</target>
+            </trans-unit>
+            <trans-unit id="comment_delete">
+                <source>comment_delete</source>
+                <target>Delete comment</target>
+            </trans-unit>
+            <trans-unit id="login_to_comment">
+                <source>login_to_comment</source>
+                <target>Log in to add comment.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    add category
+    {{ 'categories_add'|trans }}
 {% endblock %}
 
 {% block body %}
     <div class="card mt-5">
         <div class="card-body">
-            <div class="card-title">dodaj kategorie</div>
+            <div class="card-title">{{ 'categories_add'|trans }}</div>
 
             {{ form_start(form, { method: 'POST', action: url('category_create') }) }}
             {{ form_widget(form) }}
             <div class="form-group row float-sm-right">
-                <input type="submit" value="zapisz" class="btn btn-primary" />
+                <input type="submit" value="{{ 'categories_add'|trans }}" class="btn btn-primary" />
             </div>
             <div class="form-group row float-sm-left">
                 <a href="{{ url('category_index') }}" class="btn btn-link">
-                    wróć
+                    {{ 'back'|trans }}
                 </a>
             </div>
             {{ form_end(form) }}

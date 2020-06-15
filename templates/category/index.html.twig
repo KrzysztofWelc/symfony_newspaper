@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}categories{% endblock %}
+{% block title %}{{ 'categories'|trans }}{% endblock %}
 
 {% block body %}
+    <h2>{{ 'categories'|trans }}</h2>
     {% if categories is defined and categories|length %}
         <ul>
             {% for category in categories %}

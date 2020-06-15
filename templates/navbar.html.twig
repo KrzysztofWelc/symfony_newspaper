@@ -1,24 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="nav-link" href={{ url('article_index') }}><h1>Symfony Newspaper <span class="sr-only">(current)</span></h1> </a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <li class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href={{ url('article_index') }}>Home <span class="sr-only">(current)</span></a>
-            </li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
-                    <a class="nav-link" href={{ url('article_create') }}>Add article</a>
+                    <a class="nav-link" href={{ url('article_create') }}>
+                        {{ 'article_add'|trans }}
+                    </a>
                 </li>
             {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href={{ url('category_index') }}>Categories</a>
+                <a class="nav-link" href={{ url('category_index') }}>
+                    {{ 'categories'|trans }}
+                </a>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
-                    <a class="nav-link" href={{ url('category_create') }}>Add category</a>
+                    <a class="nav-link" href={{ url('category_create') }}>
+                        {{ 'categories_add'|trans }}
+                    </a>
                 </li>
             {% endif %}
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -26,16 +30,16 @@
                     <a class="nav-link" href={{ url('user_profile', {"id": app.user.id}) }}>{{ app.user.email }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('app_logout') }}">log out</a>
+                    <a class="nav-link" href="{{ url('app_logout') }}">{{ 'nav_logout'|trans }}</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('app_login') }}">login</a>
+                    <a class="nav-link" href="{{ url('app_login') }}">{{ 'nav_login'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('app_register') }}">register</a>
+                    <a class="nav-link" href="{{ url('app_register') }}">{{ 'nav_register'|trans }}</a>
                 </li>
             {% endif %}
         </ul>
-    </div>
+    </li>
 </nav>

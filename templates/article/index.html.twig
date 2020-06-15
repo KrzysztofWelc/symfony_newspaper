@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}articles{% endblock %}
+{% block title %}{{ 'articles'|trans }}{% endblock %}
 
 {% block body %}
     {% if pagination is defined and pagination.items|length %}

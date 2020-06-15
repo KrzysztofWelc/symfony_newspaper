@@ -1,15 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    single
+    {% if article is defined and article|length %}
+        {{ article.title }}
+    {% else %}
+
+    {% endif %}
 {% endblock %}
 
 {% block body %}
     {% if article is defined and article|length %}
-        <a href="{{ url("article_index") }}">wróć</a>
+        <a class="btn btn-info" href="{{ url("article_index") }}">{{ 'back'|trans }}</a>
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ url("article_edit", {"id": article.id}) }}">edutuj</a>
-            <a href="{{ url("article_delete", {"id": article.id}) }}">usuń</a>
+            <a class="btn btn-primary" href="{{ url("article_edit", {"id": article.id}) }}">{{ 'article_edit'|trans }}</a>
+            <a class="btn btn-primary" href="{{ url("article_delete", {"id": article.id}) }}">{{ 'article_delete'|trans }}</a>
         {% endif %}
         <h1>{{ article.title }}</h1>
         <strong class="text-primary d-block">{{ article.author.email }}</strong>
@@ -28,9 +32,9 @@
         <p>{{ article.body }}</p>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a class="btn btn-primary" href={{ url('comment_add', {"id": article.id})}} >skomentuj</a>
+            <a class="btn btn-primary" href={{ url('comment_add', {"id": article.id})}} >{{ 'comment'|trans }}</a>
         {% else %}
-            <div class="alert alert-info">zaloguj się, żeby komentować</div>
+            <div class="alert alert-info">{{ 'login_to_comment'|trans }}</div>
         {% endif %}
 
         {% if article.comments|length %}
@@ -41,7 +45,7 @@
                             <strong class="text-success d-block">{{ comment.author.email }}</strong>
                             <p class="mt-2">{{ comment.body }}</p>
                             {% if is_granted("ROLE_ADMIN") or is_granted("DELETE", comment) %}
-                                <a class="btn btn-outline-danger float-right" href={{ url('comment_delete', {"id": comment.id}) }}>delete</a>
+                                <a class="btn btn-outline-danger float-right" href={{ url('comment_delete', {"id": comment.id}) }}>{{ 'delete'|trans }}</a>
                             {% endif %}
                             <hr>
                         </div>
