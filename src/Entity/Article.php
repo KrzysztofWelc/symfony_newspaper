@@ -1,4 +1,7 @@
 <?php
+/**
+ * Article entity.
+ */
 
 namespace App\Entity;
 
@@ -140,66 +143,108 @@ class Article
      */
     private $thumbnail;
 
+    /**
+     * Article constructor.
+     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * Gettr fot id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter fot title.
+     *
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    /**
+     * Setter for title.
+     *
+     * @param string $title
+     */
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
+    /**
+     * Getter for body.
+     *
+     * @return string|null
+     */
     public function getBody(): ?string
     {
         return $this->body;
     }
 
-    public function setBody(string $body): self
+    /**
+     * Setter for body.
+     *
+     * @param string $body
+     */
+    public function setBody(string $body): void
     {
         $this->body = $body;
-
-        return $this;
     }
 
+    /**
+     * Getter for createdAt.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * Setter for createdAt.
+     *
+     * @param DateTimeInterface $createdAt
+     */
+    public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
+    /**
+     * Getter for category.
+     *
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    /**
+     * Setter for category.
+     *
+     * @param Category|null $category
+     */
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
-
-        return $this;
     }
 
     /**
+     * Getter for comments.
+     *
      * @return Collection|Comment[]
      */
     public function getComments(): Collection
@@ -207,17 +252,25 @@ class Article
         return $this->comments;
     }
 
-    public function addComment(Comment $comment): self
+    /**
+     * Setter for comments.
+     *
+     * @param Comment $comment
+     */
+    public function addComment(Comment $comment): void
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
             $comment->setArticle($this);
         }
-
-        return $this;
     }
 
-    public function removeComment(Comment $comment): self
+    /**
+     * Remove Comment.
+     *
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment): void
     {
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);
@@ -226,35 +279,51 @@ class Article
                 $comment->setArticle(null);
             }
         }
-
-        return $this;
     }
 
+    /**
+     * Getter for updatedAt.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * Setter for updated at.
+     *
+     * @param DateTimeInterface $updatedAt
+     */
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
+    /**
+     * Getter for code.
+     *
+     * @return string|null
+     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    /**
+     * Setter for code.
+     *
+     * @param string $code
+     */
+    public function setCode(string $code): void
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
+     * Getter for tags.
+     *
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -262,42 +331,66 @@ class Article
         return $this->tags;
     }
 
-    public function addTag(Tag $tag): self
+    /**
+     * Setter for tags.
+     *
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag): void
     {
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
         }
-
-        return $this;
     }
 
-    public function removeTag(Tag $tag): self
+    /**
+     * Setter for tags.
+     *
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag): void
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
         }
-
-        return $this;
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * Setter for author.
+     *
+     * @param User|null $author
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 
+    /**
+     * Getter for thumbnail.
+     *
+     * @return Thumbnail|null
+     */
     public function getThumbnail(): ?Thumbnail
     {
         return $this->thumbnail;
     }
 
-    public function setThumbnail(Thumbnail $thumbnail): self
+    /**
+     * Setter for thumbnail.
+     *
+     * @param Thumbnail $thumbnail
+     */
+    public function setThumbnail(Thumbnail $thumbnail): void
     {
         $this->thumbnail = $thumbnail;
 
@@ -305,7 +398,5 @@ class Article
         if ($thumbnail->getArticle() !== $this) {
             $thumbnail->setArticle($this);
         }
-
-        return $this;
     }
 }

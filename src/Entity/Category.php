@@ -39,29 +39,47 @@ class Category
      */
     private $articles;
 
+    /**
+     * Category constructor.
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
 
+    /**
+     * Getter for id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for name.
+     *
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * Setter for name.
+     *
+     * @param string $name
+     */
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
+     * Getter for articles.
+     *
      * @return Collection|Article[]
      */
     public function getArticles(): Collection
@@ -69,17 +87,25 @@ class Category
         return $this->articles;
     }
 
-    public function addArticle(Article $article): self
+    /**
+     * Setter for articles.
+     *
+     * @param Article $article
+     */
+    public function addArticle(Article $article): void
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
             $article->setCategory($this);
         }
-
-        return $this;
     }
 
-    public function removeArticle(Article $article): self
+    /**
+     * Remove article.
+     *
+     * @param Article $article
+     */
+    public function removeArticle(Article $article): void
     {
         if ($this->articles->contains($article)) {
             $this->articles->removeElement($article);
@@ -88,7 +114,5 @@ class Category
                 $article->setCategory(null);
             }
         }
-
-        return $this;
     }
 }

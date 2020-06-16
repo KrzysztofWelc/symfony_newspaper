@@ -54,56 +54,93 @@ class Comment
      */
     private $author;
 
+    /**
+     * Getter for id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for body.
+     *
+     * @return string|null
+     */
     public function getBody(): ?string
     {
         return $this->body;
     }
 
-    public function setBody(string $body): self
+    /**
+     * Setter for body.
+     *
+     * @param string $body
+     */
+    public function setBody(string $body): void
     {
         $this->body = $body;
-
-        return $this;
     }
 
+    /**
+     * Getter for article.
+     *
+     * @return Article|null
+     */
     public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    public function setArticle(?Article $article): self
+    /**
+     * Setter for article.
+     *
+     * @param Article|null $article
+     */
+    public function setArticle(?Article $article): void
     {
         $this->article = $article;
-
-        return $this;
     }
 
+    /**
+     * Getter for createdAt.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * Setter for createdAt.
+     *
+     * @param DateTimeInterface $createdAt
+     */
+    public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
+    /**
+     * Getter for author.
+     *
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * Setter for author.
+     *
+     * @param User|null $author
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 }

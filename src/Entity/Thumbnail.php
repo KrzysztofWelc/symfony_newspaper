@@ -92,7 +92,7 @@ class Thumbnail
     }
 
     /**
-     * Getter for fillename.
+     * Getter for filename.
      *
      * @return string|null
      */

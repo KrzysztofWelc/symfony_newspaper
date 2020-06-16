@@ -107,6 +107,8 @@ class User implements UserInterface
 
     /**
      * Setter for the Email.
+     *
+     * @param string $email
      */
     public function setEmail(string $email): void
     {
