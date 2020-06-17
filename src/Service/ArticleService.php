@@ -9,7 +9,6 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -28,21 +27,15 @@ class ArticleService
     private $paginator;
 
     /**
-     * @var FileUploader
-     */
-    private $fileUploader;
-
-    /**
      * ArticleService constructor.
      *
-     * @param ArticleRepository $articleRepository
+     * @param ArticleRepository  $articleRepository
      * @param PaginatorInterface $paginator
      */
-    public function __construct(ArticleRepository $articleRepository, PaginatorInterface $paginator, FileUploader $fileUploader)
+    public function __construct(ArticleRepository $articleRepository, PaginatorInterface $paginator)
     {
         $this->articleRepository = $articleRepository;
         $this->paginator = $paginator;
-        $this->fileUploader = $fileUploader;
     }
 
     /**
@@ -62,28 +55,22 @@ class ArticleService
     /**
      * Save Article.
      *
-     * @param Article $article
-     * @param UserInterface $user
+     * @param  UserInterface $user
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(Article $article, UserInterface $user = null, UploadedFile $image = null): void
+    public function save(Article $article, UserInterface $user = null): void
     {
-        if($user instanceof UserInterface){
+        if ($user instanceof UserInterface) {
             $article->setAuthor($user);
         }
 
-        if($image){
-            $this->fileUploader->upload($image, $article);
-        }
         $this->articleRepository->save($article);
     }
 
     /**
      * Delete article.
-     *
-     * @param Article $article
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

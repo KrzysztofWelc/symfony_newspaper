@@ -4,9 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
-use App\Repository\ArticleRepository;
-use App\Repository\CommentRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,9 +102,7 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageData = $form->get('file')->getData();
-            $image = isset($imageData) ? $imageData : null;
-            $this->articleService->save($article, $this->getUser(), $image);
+            $this->articleService->save($article, $this->getUser());
             $this->addFlash('success', 'article created');
 
             return $this->redirectToRoute('article_index');

@@ -139,11 +139,6 @@ class Article
     private $author;
 
     /**
-     * @ORM\OneToOne(targetEntity=Thumbnail::class, mappedBy="article", cascade={"persist", "remove"})
-     */
-    private $thumbnail;
-
-    /**
      * Article constructor.
      */
     public function __construct()
@@ -153,7 +148,7 @@ class Article
     }
 
     /**
-     * Gettr fot id.
+     * Getter fot id.
      *
      * @return int|null
      */
@@ -375,28 +370,4 @@ class Article
         $this->author = $author;
     }
 
-    /**
-     * Getter for thumbnail.
-     *
-     * @return Thumbnail|null
-     */
-    public function getThumbnail(): ?Thumbnail
-    {
-        return $this->thumbnail;
-    }
-
-    /**
-     * Setter for thumbnail.
-     *
-     * @param Thumbnail $thumbnail
-     */
-    public function setThumbnail(Thumbnail $thumbnail): void
-    {
-        $this->thumbnail = $thumbnail;
-
-        // set the owning side of the relation if necessary
-        if ($thumbnail->getArticle() !== $this) {
-            $thumbnail->setArticle($this);
-        }
-    }
 }
