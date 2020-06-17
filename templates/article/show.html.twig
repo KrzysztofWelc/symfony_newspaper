@@ -26,10 +26,8 @@
                 {% endfor %}
             </div>
         {% endif %}
-        {% if article.thumbnail.filename is defined and article.thumbnail.filename|length %}
-            <img src="{{ asset('uploads/thumbnails/' ~ article.thumbnail.filename) }}">
-        {% endif %}
-        <p>{{ article.body }}</p>
+
+        <p>{{ article.body|markdown_to_html }}</p>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <a class="btn btn-primary" href={{ url('comment_add', {"id": article.id})}} >{{ 'comment'|trans }}</a>

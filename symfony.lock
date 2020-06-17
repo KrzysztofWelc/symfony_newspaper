@@ -102,6 +102,9 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "erusev/parsedown": {
+        "version": "1.7.4"
+    },
     "escapestudios/symfony2-coding-standard": {
         "version": "3.11.0"
     },
@@ -578,6 +581,9 @@
         "version": "v4.4.8"
     },
     "twig/extra-bundle": {
+        "version": "v3.0.3"
+    },
+    "twig/markdown-extra": {
         "version": "v3.0.3"
     },
     "twig/twig": {

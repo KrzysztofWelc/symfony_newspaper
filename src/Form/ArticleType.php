@@ -10,6 +10,7 @@ use App\Entity\Category;
 use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -60,10 +61,13 @@ class ArticleType extends AbstractType
         );
         $builder->add(
             'body',
-            TextType::class,
+            TextareaType::class,
             [
                 'label' => 'Body',
                 'required' => true,
+                'attr' => [
+                    'rows' => 10,
+                ]
             ]
         );
         $builder->add(
@@ -78,7 +82,7 @@ class ArticleType extends AbstractType
             'tags',
             TextType::class,
             [
-                'label' => 'label_tags',
+                'label' => 'tags',
                 'required' => false,
                 'attr' => ['max_length' => 128],
             ]
