@@ -46,7 +46,7 @@ class ArticleService
     public function createPaginatedList(int $page): PaginationInterface
     {
         return $this->paginator->paginate(
-            $this->articleRepository->queryAll(),
+            $this->articleRepository->getPublishedArticles(),
             $page,
             ArticleRepository::PAGINATOR_ITEMS_PER_PAGE
         );

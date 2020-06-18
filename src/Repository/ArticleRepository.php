@@ -90,6 +90,23 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Get published articles.
+     */
+    public function getPublishedArticles()
+    {
+        $qb = $this->getOrCreateQueryBuilder();
+
+        $qb
+            ->select()
+            ->andWhere('article.isPublished = true')
+            ->orderBy('article.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder

@@ -10,6 +10,8 @@ use App\Entity\Category;
 use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -85,6 +87,14 @@ class ArticleType extends AbstractType
                 'label' => 'tags',
                 'required' => false,
                 'attr' => ['max_length' => 128],
+            ]
+        );
+        $builder->add(
+            'isPublished',
+            CheckboxType::class,
+            [
+                'label' => 'is published',
+                'required' => false,
             ]
         );
         $builder->get('tags')->addModelTransformer(

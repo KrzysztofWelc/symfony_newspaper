@@ -139,6 +139,11 @@ class Article
     private $author;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+
+    /**
      * Article constructor.
      */
     public function __construct()
@@ -368,6 +373,26 @@ class Article
     public function setAuthor(?User $author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * Getter for isPublished.
+     *
+     * @return bool|null
+     */
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    /**
+     * Setter for isPublished.
+     *
+     * @param bool $isPublished
+     */
+    public function setIsPublished(bool $isPublished): void
+    {
+        $this->isPublished = $isPublished;
     }
 
 }
