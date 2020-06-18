@@ -52,10 +52,24 @@ class UserFixtures extends AbstractBaseFixtures
             return $user;
         });
 
-        $this->createMany(3, 'admins', function ($i) {
+        $this->createMany(5, 'admins', function ($i) {
             $user = new User();
             $user->setEmail(sprintf('admin%d@example.com', $i));
-            $user->setRoles([User::ROLE_USER, User::ROLE_ADMIN]);
+            $user->setRoles([User::ROLE_USER, User::ROLE_REDACTOR, User::ROLE_ADMIN]);
+            $user->setPassword(
+                $this->passwordEncoder->encodePassword(
+                    $user,
+                    'admin1234'
+                )
+            );
+
+            return $user;
+        });
+
+        $this->createMany(2, 'redactors', function ($i) {
+            $user = new User();
+            $user->setEmail(sprintf('redactor%d@example.com', $i));
+            $user->setRoles([User::ROLE_USER, User::ROLE_REDACTOR]);
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
                     $user,

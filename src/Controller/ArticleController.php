@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Service\ArticleService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use App\Service\ArticleService;
 
 /**
  * Class ArticleController.
@@ -26,8 +27,6 @@ class ArticleController extends AbstractController
 
     /**
      * ArticleController constructor.
-     *
-     * @param ArticleService $articleService
      */
     public function __construct(ArticleService $articleService)
     {
@@ -37,10 +36,10 @@ class ArticleController extends AbstractController
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request.
-     * @param \App\Repository\ArticleRepository         $repository Task repository.
+     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
+     * @param \App\Repository\ArticleRepository         $repository task repository
      *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response.
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route("/", name="article_index")
      */
@@ -55,7 +54,7 @@ class ArticleController extends AbstractController
     /**
      * Show action.
      *
-     * @param \App\Entity\Article                       $article           Article entity
+     * @param \App\Entity\Article $article Article entity
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -80,7 +79,7 @@ class ArticleController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -93,7 +92,7 @@ class ArticleController extends AbstractController
      *     name="article_create",
      * )
      *
-     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_REDACTOR')")
      */
     public function create(Request $request): Response
     {
@@ -117,8 +116,8 @@ class ArticleController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Entity\Article                       $article           Article entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Article                       $article Article entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -132,7 +131,7 @@ class ArticleController extends AbstractController
      *     name="article_edit",
      * )
      *
-     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN') or ( is_granted('ROLE_REDACTOR') and is_granted('EDIT', article) )")
      */
     public function edit(Request $request, Article $article): Response
     {
@@ -159,8 +158,8 @@ class ArticleController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param \App\Entity\Article                       $article           Article entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Article                       $article Article entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -174,7 +173,7 @@ class ArticleController extends AbstractController
      *     name="article_delete",
      * )
      *
-     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN') or ( is_granted('ROLE_REDACTOR') and is_granted('EDIT', article) )")
      */
     public function delete(Request $request, Article $article): Response
     {

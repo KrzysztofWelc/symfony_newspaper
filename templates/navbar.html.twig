@@ -6,7 +6,7 @@
     </button>
     <li class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_REDACTOR') %}
                 <li class="nav-item">
                     <a class="nav-link" href={{ url('article_create') }}>
                         {{ 'article_add'|trans }}
