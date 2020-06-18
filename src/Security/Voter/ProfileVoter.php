@@ -71,7 +71,7 @@ class ProfileVoter extends Voter
                 }
                 break;
             case 'BLOCK':
-                if (count($subject->getRoles()) < count($user->getRoles())) {
+                if (count($subject->getRoles()) < count($user->getRoles()) and count($user->getRoles()) > 2) {
                     return true;
                 }
                 break;
