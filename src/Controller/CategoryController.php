@@ -95,6 +95,12 @@ class CategoryController extends AbstractController
      */
     public function create(Request $request): Response
     {
+        if (!$this->getUser()->getCanPublish()) {
+            $this->addFlash('danger', 'You are currently blocked.');
+
+            return $this->redirectToRoute('article_index');
+        }
+
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);

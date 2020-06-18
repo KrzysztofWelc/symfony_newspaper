@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Service\ArticleService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -96,6 +95,12 @@ class ArticleController extends AbstractController
      */
     public function create(Request $request): Response
     {
+        if (!$this->getUser()->getCanPublish()) {
+            $this->addFlash('danger', 'You are currently blocked.');
+
+            return $this->redirectToRoute('article_index');
+        }
+
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);

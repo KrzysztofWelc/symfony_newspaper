@@ -54,6 +54,12 @@ class CommentController extends AbstractController
      */
     public function add(Request $request, Article $article): Response
     {
+        if (!$this->getUser()->getCanPublish()) {
+            $this->addFlash('danger', 'You are currently blocked.');
+
+            return $this->redirectToRoute('article_index');
+        }
+
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);

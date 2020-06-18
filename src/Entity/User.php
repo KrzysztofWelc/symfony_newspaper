@@ -211,16 +211,24 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * Getter for cnaPublish.
+     *
+     * @return bool|null
+     */
     public function getCanPublish(): ?bool
     {
         return $this->canPublish;
     }
 
-    public function setCanPublish(bool $canPublish): self
+    /**
+     * Setter for canPublish.
+     *
+     * @param bool $canPublish
+     */
+    public function setCanPublish(bool $canPublish): void
     {
         $this->canPublish = $canPublish;
-
-        return $this;
     }
 
 
