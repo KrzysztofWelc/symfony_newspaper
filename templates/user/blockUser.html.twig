@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    block user
+{% endblock %}
+
+{% block body %}
+    <div class="card mt-5">
+        <div class="card-body">
+            <div class="card-title">block user</div>
+
+            {{ form_start(form, { method: 'PUT', action: url('user_block', {'id': id}) }) }}
+            {{ form_widget(form) }}
+            <div class="form-group row float-sm-right">
+                <input type="submit" value="zapisz" class="btn btn-primary" />
+            </div>
+            <div class="form-group row float-sm-left">
+                <a href="{{ url('user_profile', {"id": app.user.id}) }}" class="btn btn-link">
+                    {{ 'back'|trans }}
+                </a>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}

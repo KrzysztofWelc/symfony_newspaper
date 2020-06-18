@@ -40,7 +40,7 @@ class ProfileVoter extends Voter
      */
     protected function supports($attribute, $subject)
     {
-        return in_array($attribute, ['EDIT'])
+        return in_array($attribute, ['EDIT', 'BLOCK'])
             && $subject instanceof User;
     }
 
@@ -67,6 +67,11 @@ class ProfileVoter extends Voter
         switch ($attribute) {
             case 'EDIT':
                 if ($subject->getId() === $user->getId()) {
+                    return true;
+                }
+                break;
+            case 'BLOCK':
+                if (count($subject->getRoles()) < count($user->getRoles())) {
                     return true;
                 }
                 break;

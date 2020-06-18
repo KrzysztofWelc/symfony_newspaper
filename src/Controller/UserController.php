@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\AdminPwdChangeType;
+use App\Form\BlockUserType;
 use App\Form\CredentialsType;
 use App\Form\PasswordChangeType;
 use App\Service\UserService;
@@ -135,6 +136,46 @@ class UserController extends AbstractController
 
         return $this->render(
             'user/changePassword.html.twig',
+            [
+                'form' => $form->createView(),
+                'id' => $usr->getId(),
+            ]
+        );
+    }
+
+    /**
+     * Block / unblock user action.
+     *
+     * @param Request $request HTTP request
+     * @param User    $usr     user entity
+     *
+     * @return Response HTTP response
+     *
+     * @Route(
+     *     "/block_user/{id}",
+     *     name="user_block",
+     *     methods={"GET", "PUT"}
+     * )
+     *
+     * @Security("is_granted('BLOCK', usr)")
+     */
+    public function blockUser(Request $request, User $usr): Response
+    {
+        $form = $this->createForm(BlockUserType::class, $usr, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $status = $usr->getCanPublish() ? 'user unblocked' : 'user blocked';
+
+            $this->userService->save($usr);
+
+            $this->addFlash('success', $status);
+
+            return $this->redirectToRoute('user_profile', ['id' => $usr->getId()]);
+        }
+
+        return $this->render(
+            'user/blockUser.html.twig',
             [
                 'form' => $form->createView(),
                 'id' => $usr->getId(),

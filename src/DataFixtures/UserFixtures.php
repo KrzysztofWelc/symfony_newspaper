@@ -42,6 +42,7 @@ class UserFixtures extends AbstractBaseFixtures
             $user = new User();
             $user->setEmail(sprintf('user%d@example.com', $i));
             $user->setRoles([User::ROLE_USER]);
+            $user->setCanPublish(true);
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
                     $user,
@@ -56,6 +57,7 @@ class UserFixtures extends AbstractBaseFixtures
             $user = new User();
             $user->setEmail(sprintf('admin%d@example.com', $i));
             $user->setRoles([User::ROLE_USER, User::ROLE_REDACTOR, User::ROLE_ADMIN]);
+            $user->setCanPublish(true);
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
                     $user,
@@ -70,6 +72,22 @@ class UserFixtures extends AbstractBaseFixtures
             $user = new User();
             $user->setEmail(sprintf('redactor%d@example.com', $i));
             $user->setRoles([User::ROLE_USER, User::ROLE_REDACTOR]);
+            $user->setCanPublish(true);
+            $user->setPassword(
+                $this->passwordEncoder->encodePassword(
+                    $user,
+                    'admin1234'
+                )
+            );
+
+            return $user;
+        });
+
+        $this->createMany(1, 'super_admins', function ($i) {
+            $user = new User();
+            $user->setEmail(sprintf('superadmin%d@example.com', $i));
+            $user->setRoles([User::ROLE_USER, User::ROLE_REDACTOR, User::ROLE_ADMIN, User::ROLE_SUPER_ADMIN]);
+            $user->setCanPublish(true);
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
                     $user,

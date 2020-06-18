@@ -48,6 +48,13 @@ class User implements UserInterface
     const ROLE_REDACTOR = 'ROLE_REDACTOR';
 
     /**
+     * Role admin.
+     *
+     * @var string
+     */
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+
+    /**
      * Primary key.
      *
      * @var int
@@ -91,6 +98,11 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $canPublish;
 
     /**
      * Getter for the Id.
@@ -197,6 +209,18 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getCanPublish(): ?bool
+    {
+        return $this->canPublish;
+    }
+
+    public function setCanPublish(bool $canPublish): self
+    {
+        $this->canPublish = $canPublish;
+
+        return $this;
     }
 
 

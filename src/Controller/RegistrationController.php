@@ -31,6 +31,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setCanPublish(true);
             $user->setRoles([User::ROLE_USER]);
 
             $entityManager = $this->getDoctrine()->getManager();

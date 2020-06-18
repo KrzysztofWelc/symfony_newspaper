@@ -55,7 +55,8 @@ class ArticleService
     /**
      * Save Article.
      *
-     * @param  UserInterface $user
+     * @param Article       $article
+     * @param UserInterface $user
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -72,6 +73,7 @@ class ArticleService
     /**
      * Delete article.
      *
+     * @param Article $article
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
