@@ -3,9 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -71,6 +72,24 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param User $usr user entity
+     */
+    public function getUsersArticles(User $usr)
+    {
+        $qb = $this->getOrCreateQueryBuilder();
+
+        $qb
+            ->select()
+            ->andWhere('article.author = :author')
+            ->orderBy('article.createdAt', 'DESC')
+            ->setParameter('author', $usr)
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
@@ -81,5 +100,4 @@ class ArticleRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('article');
     }
-
 }

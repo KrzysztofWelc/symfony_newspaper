@@ -7,6 +7,9 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Repository\ArticleRepository;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -20,6 +23,11 @@ class UserService
     private $userRepository;
 
     /**
+     * @var App\Repository\ArticleRepository;
+     */
+    private $articleRepository;
+
+    /**
      * Password encoder.
      *
      * @var Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface
@@ -27,14 +35,24 @@ class UserService
     private $passwordEncoder;
 
     /**
+     * @var Knp\Component\Pager\PaginatorInterface
+     */
+    private $paginator;
+
+    /**
      * UserService constructor.
      *
      * @param UserRepository $repository User repository
+     * @param ArticleRepository $articleRepository
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param PaginatorInterface $paginator
      */
-    public function __construct(UserRepository $repository, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserRepository $repository,ArticleRepository $articleRepository, UserPasswordEncoderInterface $passwordEncoder, PaginatorInterface $paginator)
     {
         $this->userRepository = $repository;
+        $this->articleRepository = $articleRepository;
         $this->passwordEncoder = $passwordEncoder;
+        $this->paginator = $paginator;
     }
 
     /**
@@ -81,5 +99,20 @@ class UserService
         }
 
         return $success;
+    }
+
+    /**
+     * @param int $page
+     * @param User $usr
+     *
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
+     */
+    public function createPaginatedArticlesList(int $page, User $usr): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->articleRepository->getUsersArticles($usr),
+            $page,
+            5
+        );
     }
 }

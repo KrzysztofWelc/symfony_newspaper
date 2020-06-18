@@ -38,17 +38,23 @@ class UserController extends AbstractController
     /**
      * Profile action.
      *
-     * @param User $usr User entity
+     * @param Request $request HTTP request
+     * @param User    $usr     User entity
+     *
+     * @return Response HTTP response
      *
      * @Route("/profile/{id}", name="user_profile")
      *
      * @Security("is_granted('ROLE_ADMIN') or is_granted('EDIT', usr)")
      */
-    public function profile(User $usr): Response
+    public function profile(Request $request, User $usr): Response
     {
+        $page = $request->query->getInt('page', 1);
+        $paginator = $this->userService->createPaginatedArticlesList($page, $usr);
+
         return $this->render(
             'user/profile.html.twig',
-            ['user' => $usr]
+            ['user' => $usr, 'pagination' => $paginator]
         );
     }
 

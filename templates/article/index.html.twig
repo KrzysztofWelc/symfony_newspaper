@@ -13,9 +13,5 @@
                 <li><a href="{{ url('article_show', {"id": article.id}) }}">{{ article.title }}</a></li>
             {% endfor %}
         </ul>
-
-        <div class="navigation text-center">
-            {{ knp_pagination_render(pagination) }}
-        </div>
     {% endif %}
 {% endblock %}
