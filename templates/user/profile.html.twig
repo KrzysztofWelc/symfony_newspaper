@@ -33,6 +33,25 @@
             </td>
         </tr>
        {% endif %}
+       <tr>
+           <td>role</td>
+           <td>
+               {% if user.roles|length == 1 %}
+                   regular user
+               {% elseif user.roles|length == 2 %}
+                   redactor
+               {% elseif user.roles|length == 3 %}
+                   admin
+               {% elseif user.roles|length == 4 %}
+                   super admin
+               {% endif %}
+           </td>
+           <td>
+               {% if is_granted('BLOCK', user) %}
+                   <a href={{ url('user_permissions', {'id': user.id}) }}>{{ 'change'|trans }}</a>
+               {% endif %}
+           </td>
+       </tr>
    </table>
 
 

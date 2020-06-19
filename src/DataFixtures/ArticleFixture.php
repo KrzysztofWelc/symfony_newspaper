@@ -22,7 +22,7 @@ class ArticleFixture extends AbstractBaseFixtures implements DependentFixtureInt
             $article->setBody($this->faker->text(700));
             $article->setIsPublished(true);
             $article->setCategory($this->getRandomReference('categories'));
-            $article->setAuthor($this->getRandomReference('users'));
+            $article->setAuthor($this->getRandomReference('admins'));
 
             $this->manager->persist($article);
         }

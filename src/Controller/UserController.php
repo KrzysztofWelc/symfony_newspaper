@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AdminPermissionsType;
 use App\Form\AdminPwdChangeType;
 use App\Form\BlockUserType;
 use App\Form\CredentialsType;
@@ -180,6 +181,58 @@ class UserController extends AbstractController
                 'form' => $form->createView(),
                 'id' => $usr->getId(),
             ]
+        );
+    }
+
+    /**
+     * Change user's permissions action.
+     *
+     * @param Request $request HTTP request
+     * @param User    $usr     user entity
+     *
+     * @return Response HTTP response
+     *
+     * @Route(
+     *     "/change_permissions/{id}",
+     *     name="user_permissions",
+     *     methods={"GET", "PUT"}
+     * )
+     *
+     * @Security("is_granted('BLOCK', usr)")
+     */
+    public function changePermissions(Request $request, User $usr): Response
+    {
+//        $formType = $this->isGranted('ROLE_SUPER_ADMIN');
+        $form = $this->createForm(AdminPermissionsType::class, null, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $role = $form->get('role')->getData();
+
+            switch ($role) {
+                case User::ROLE_USER:
+                    $newRoles = [User::ROLE_USER];
+                    $usr->setRoles($newRoles);
+                    break;
+                case User::ROLE_REDACTOR:
+                    $newRoles = [User::ROLE_USER, User::ROLE_REDACTOR];
+                    $usr->setRoles($newRoles);
+                    break;
+                case User::ROLE_ADMIN:
+                    $newRoles = [User::ROLE_USER, User::ROLE_REDACTOR, User::ROLE_ADMIN];
+                    $usr->setRoles($newRoles);
+                    break;
+            }
+
+            $this->userService->save($usr);
+            $this->addFlash('success', 'User permissions changed.');
+
+            return $this->redirectToRoute('user_profile', ['id' => $usr->getId()]);
+        }
+
+        return $this->render(
+            'user/changePermissions.html.twig',
+            ['form' => $form->createView(), 'id' => $usr->getId()]
         );
     }
 }
