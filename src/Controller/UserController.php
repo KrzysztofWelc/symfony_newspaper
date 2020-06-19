@@ -48,7 +48,6 @@ class UserController extends AbstractController
      *
      * @Route("/profile/{id}", name="user_profile")
      *
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('EDIT', usr)")
      */
     public function profile(Request $request, User $usr): Response
     {
@@ -76,7 +75,7 @@ class UserController extends AbstractController
      *     methods={"GET", "PUT"}
      * )
      *
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('EDIT', usr)")
+     * @Security("is_granted('BLOCK', usr) or is_granted('EDIT', usr)")
      */
     public function changeEmail(Request $request, User $usr): Response
     {
@@ -112,7 +111,7 @@ class UserController extends AbstractController
      *     methods={"GET", "PUT"}
      * )
      *
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('EDIT', usr)")
+     * @Security("is_granted('BLOCK', usr) or is_granted('EDIT', usr)")
      */
     public function changePassword(Request $request, User $usr): Response
     {

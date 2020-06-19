@@ -16,7 +16,7 @@
             <a class="btn btn-primary" href="{{ url("article_delete", {"id": article.id}) }}">{{ 'article_delete'|trans }}</a>
         {% endif %}
         <h1>{{ article.title }}</h1>
-        <strong class="text-primary d-block">{{ article.author.email }}</strong>
+        <strong class="text-primary d-block"><a href={{ url('user_profile', {'id': article.author.id}) }}>{{ article.author.email }}</a></strong>
         <small class="text-muted d-block">{{ article.updatedAt|date }}</small>
         <a class="d-block" href={{ url('category_show', {"name": article.category.name}) }}>{{ article.category.name }}</a>
         {% if article.tags is defined and article.tags|length %}

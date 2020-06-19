@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ app.user.email }}
+    {{ user.email }}
 {% endblock %}
 
 {% block body %}
@@ -9,13 +9,19 @@
         <tr>
             <td>email</td>
             <td>{{ user.email }}</td>
-            <td><a href={{ url('user_email_change', {'id': user.id}) }}>{{ 'change'|trans }}</a></td>
+            <td>
+                {% if is_granted('BLOCK', user) or is_granted('EDIT', user) %}
+                    <a href={{ url('user_email_change', {'id': user.id}) }}>{{ 'change'|trans }}</a>
+                {% endif %}
+            </td>
        </tr>
        <tr>
             <td>{{ 'password'|trans }}</td>
             <td>{{ 'secret'|trans }}</td>
             <td>
-                <a href={{ url('user_password_change', {'id': user.id}) }}>{{ 'change'|trans }}</a>
+                {% if is_granted('BLOCK', user) or is_granted('EDIT', user) %}
+                    <a href={{ url('user_password_change', {'id': user.id}) }}>{{ 'change'|trans }}</a>
+                {% endif %}
             </td>
        </tr>
        {% if is_granted('BLOCK', user) %}
