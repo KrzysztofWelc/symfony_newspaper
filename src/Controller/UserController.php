@@ -8,6 +8,7 @@ use App\Form\AdminPwdChangeType;
 use App\Form\BlockUserType;
 use App\Form\CredentialsType;
 use App\Form\PasswordChangeType;
+use App\Form\SuperAdminPermissionsType;
 use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -202,8 +203,8 @@ class UserController extends AbstractController
      */
     public function changePermissions(Request $request, User $usr): Response
     {
-//        $formType = $this->isGranted('ROLE_SUPER_ADMIN');
-        $form = $this->createForm(AdminPermissionsType::class, null, ['method' => 'PUT']);
+        $formType = $this->isGranted('ROLE_SUPER_ADMIN') ? SuperAdminPermissionsType::class : AdminPermissionsType::class;
+        $form = $this->createForm($formType, null, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

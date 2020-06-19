@@ -1,6 +1,6 @@
 <?php
 /**
- * AdminPermissions type.
+ * SuperAdminPermissions type.
  */
 
 namespace App\Form;
@@ -11,9 +11,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use App\Entity\User;
 
 /**
- * Class AdminPermissionsType.
+ * Class SuperAdminPermissionsType.
  */
-class AdminPermissionsType extends AbstractType
+class SuperAdminPermissionsType extends AbstractType
 {
     /**
      * Builds the form.
@@ -37,6 +37,7 @@ class AdminPermissionsType extends AbstractType
                 'choices' => [
                     'regular' => User::ROLE_USER,
                     'redactor' => User::ROLE_REDACTOR,
+                    'admin' => User::ROLE_ADMIN,
                 ],
             ]
         );
