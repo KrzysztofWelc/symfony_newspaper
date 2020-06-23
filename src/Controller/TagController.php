@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Tag;
 use App\Form\TagSearchType;
 use App\Repository\TagRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,32 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TagController extends AbstractController
 {
+    /**
+     * Tags index.
+     *
+     * @param Request            $request
+     * @param TagRepository      $repository
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
+     *
+     * @Route("/", name="tag_index")
+     */
+    public function index(Request $request, TagRepository $repository, PaginatorInterface $paginator): Response
+    {
+        $tags = $repository->findAll();
+        $pagination = $paginator->paginate(
+            $tags,
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        return $this->render(
+            'tag/index.html.twig',
+            ['pagination' => $pagination]
+        );
+    }
+
     /**
      * Show action.
      *

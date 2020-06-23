@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    tag index
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'article_edit'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <ul>
+            {% for tag in pagination.items %}
+                <li><a href={{ url('tag_show', {'code': tag.code}) }}>{{ tag.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+
+    {% else %}
+        <p>
+            {{ 'message_empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

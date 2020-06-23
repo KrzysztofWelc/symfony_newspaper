@@ -3,7 +3,7 @@
 {% block title %}#{{ tag.code }}{% endblock %}
 
 {% block body %}
-    <h1>tag: {{ tag.name }}</h1>
+    <h1 class="mb-3">tag: {{ tag.name }}</h1>
 
     {% if tag.articles is defined and tag.articles|length %}
         {% for article in tag.articles %}
