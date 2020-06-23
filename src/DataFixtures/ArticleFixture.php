@@ -16,16 +16,19 @@ class ArticleFixture extends AbstractBaseFixtures implements DependentFixtureInt
 {
     public function loadData(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 30; ++$i) {
+        $this->createMany(50, 'articles', function ($i) {
+            $groups = ['admins', 'redactors'];
+            $ownerType = $groups[rand(0, 1)];
+
             $article = new Article();
             $article->setTitle($this->faker->sentence);
             $article->setBody($this->faker->text(700));
             $article->setIsPublished(true);
             $article->setCategory($this->getRandomReference('categories'));
-            $article->setAuthor($this->getRandomReference('admins'));
+            $article->setAuthor($this->getRandomReference($ownerType));
 
-            $this->manager->persist($article);
-        }
+            return $article;
+        });
         $manager->flush();
     }
 
@@ -37,6 +40,6 @@ class ArticleFixture extends AbstractBaseFixtures implements DependentFixtureInt
      */
     public function getDependencies(): array
     {
-        return [CategoryFixtures::class];
+        return [CategoryFixtures::class, UserFixtures::class];
     }
 }
