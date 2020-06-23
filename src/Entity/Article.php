@@ -108,11 +108,17 @@ class Article
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\Type(type="App\Entity\Category")
      */
     private $category;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article", orphanRemoval=true)
+     *
+     * @Assert\All({
+     *   @Assert\Type(type="App\Entity\Comment")
+     * })
      *
      */
     private $comments;
@@ -125,6 +131,10 @@ class Article
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="articles", orphanRemoval=true)
      *
      * @ORM\JoinTable(name="articles_tags")
+     *
+     * @Assert\All({
+     *   @Assert\Type(type="App\Entity\Tag")
+     * })
      */
     private $tags;
 
@@ -135,11 +145,15 @@ class Article
      *
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\Type(type="App\Entity\User")
      */
     private $author;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Assert\Type("boolean")
      */
     private $isPublished;
 

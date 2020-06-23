@@ -32,6 +32,7 @@ class Comment
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      *
+     * @Assert\Type(type="App\Entity\Article")
      */
     private $article;
 
