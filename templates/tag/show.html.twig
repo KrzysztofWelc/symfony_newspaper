@@ -4,9 +4,10 @@
 
 {% block body %}
     <h1 class="mb-3">tag: {{ tag.name }}</h1>
-    <a class="btn btn-info" href={{ url('tag_edit', {'id': tag.id}) }}>{{ 'change'|trans }}</a>
-    <a class="btn btn-danger" href={{ url('tag_delete', {'id': tag.id}) }}>{{ 'delete'|trans }}</a>
-
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-info" href={{ url('tag_edit', {'id': tag.id}) }}>{{ 'change'|trans }}</a>
+        <a class="btn btn-danger" href={{ url('tag_delete', {'id': tag.id}) }}>{{ 'delete'|trans }}</a>
+    {% endif %}
     {% if tag.articles is defined and tag.articles|length %}
         {% for article in tag.articles %}
             <li><a href={{ url('article_show', {"id": article.id})  }}>{{ article.title }}</a></li>

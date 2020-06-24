@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * Class TagController.
@@ -89,6 +91,8 @@ class TagController extends AbstractController
      * @throws OptimisticLockException
      *
      * @Route("/edit/{id}", name="tag_edit", methods={"GET", "PUT"},)
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function editTag(Request $request, Tag $tag)
     {
@@ -126,6 +130,8 @@ class TagController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="tag_delete",
      *     )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Tag $tag): Response
     {
