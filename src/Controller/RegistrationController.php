@@ -40,6 +40,8 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
+            $this->addFlash('success', 'you have been registered');
+
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,

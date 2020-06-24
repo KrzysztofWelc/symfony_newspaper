@@ -42,7 +42,11 @@ class Tag
      * )
      *
      * @Assert\Type(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="1",
+     *     max="64",
+     * )
      */
     private $name;
 
@@ -70,7 +74,10 @@ class Tag
      * )
      *
      * @Assert\Type(type="string")
-     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min="1",
+     *     max="64",
+     * )
      *
      * @Gedmo\Slug(fields={"name"})
      */
