@@ -19,19 +19,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class TagController extends AbstractController
 {
     /**
+     * @var TagRepository;
+     */
+    private $repository;
+
+    public function __construct(TagRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
      * Tags index.
      *
-     * @param Request            $request
-     * @param TagRepository      $repository
+     * @param Request $request
      * @param PaginatorInterface $paginator
      *
      * @return Response
      *
      * @Route("/", name="tag_index")
      */
-    public function index(Request $request, TagRepository $repository, PaginatorInterface $paginator): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
-        $tags = $repository->findAll();
+        $tags = $this->repository->findAll();
         $pagination = $paginator->paginate(
             $tags,
             $request->query->getInt('page', 1),
@@ -63,14 +72,13 @@ class TagController extends AbstractController
     /**
      * Search action.
      *
-     * @param Request       $request
-     * @param TagRepository $repository
+     * @param Request $request
      *
      * @return Response
      *
      * @Route("/search", name="tag_search")
      */
-    public function search(Request $request, TagRepository $repository): Response
+    public function search(Request $request): Response
     {
         $form = $this->createForm(TagSearchType::class, null);
         $form->handleRequest($request);
@@ -79,7 +87,7 @@ class TagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $phrase = $form->get('phrase')->getData();
-            $tag = $repository->findOneByName($phrase);
+            $tag = $this->repository->findOneByName($phrase);
 
             if ($tag) {
                 $articles = $tag->getArticles();
