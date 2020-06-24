@@ -23,6 +23,27 @@
                 <source>categories_edit</source>
                 <target>Edytuj kategorię</target>
             </trans-unit>
+            <trans-unit id="category_created_msg">
+                <source>category_created_msg</source>
+                <target>Kategoria utworzona.</target>
+            </trans-unit>
+            <trans-unit id="category_updated_msg">
+                <source>category_updated_msg</source>
+                <target>Kategoria zaktualizowana.</target>
+            </trans-unit>
+            <trans-unit id="category_deleted_msg">
+                <source>category_deleted_msg</source>
+                <target>Usunięto kategorię.</target>
+            </trans-unit>
+            <!--    Tags        -->
+            <trans-unit id="tag_updated_msg">
+                <source>tag_updated_msg</source>
+                <target>Tag zaktualizowany.</target>
+            </trans-unit>
+            <trans-unit id="tag_deleted_msg">
+                <source>tag_deleted_msg</source>
+                <target>Tag usunięty.</target>
+            </trans-unit>
             <!--    Articles        -->
             <trans-unit id="articles">
                 <source>articles</source>
@@ -44,6 +65,18 @@
                 <source>article_edit</source>
                 <target>Edytuj artykuł</target>
             </trans-unit>
+            <trans-unit id="article_created_msg">
+                <source>article_created_msg</source>
+                <target>Stworzono artykuł.</target>
+            </trans-unit>
+            <trans-unit id="article_updated_msg">
+                <source>article_updated_msg</source>
+                <target>Edytowano artykuł.</target>
+            </trans-unit>
+            <trans-unit id="article_deleted_msg">
+                <source>article_deleted_msg</source>
+                <target>Usunięto artykuł.</target>
+            </trans-unit>
             <!--    Auth        -->
             <trans-unit id="nav_login">
                 <source>nav_login</source>
@@ -60,9 +93,38 @@
             <trans-unit id="email_change">
                 <source>email_change</source>
                 <target>Zmień email</target>
-            </trans-unit><trans-unit id="password_change">
+            </trans-unit>
+            <trans-unit id="password_change">
                 <source>password_change</source>
-                <target>Zmień password</target>
+                <target>Zmień hasło</target>
+            </trans-unit>
+            <trans-unit id="email_updated_msg">
+                <source>email_updated_msg</source>
+                <target>Email zaktualizowany.</target>
+            </trans-unit>
+            <trans-unit id="password_updated_msg">
+                <source>password_updated_msg</source>
+                <target>Hasło zaktualizowane.</target>
+            </trans-unit>
+            <trans-unit id="wrong_password_msg">
+                <source>wrong_password_msg</source>
+                <target>Złe hasło</target>
+            </trans-unit>
+            <trans-unit id="user_blocked_msg">
+                <source>user_blocked_msg</source>
+                <target>Użytkownik zablokowany.</target>
+            </trans-unit>
+            <trans-unit id="user_unblocked_msg">
+                <source>user_unblocked_msg</source>
+                <target>Użytkownik odblokowany.</target>
+            </trans-unit>
+            <trans-unit id="permission_updated_msg">
+                <source>permission_updated_msg</source>
+                <target>Uprawnienia zmnienione.</target>
+            </trans-unit>
+            <trans-unit id="banned_msg">
+                <source>banned_msg</source>
+                <target>Zostałeś zablokowany.</target>
             </trans-unit>
             <!--    General        -->
             <trans-unit id="back">

@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class UserController.
@@ -29,13 +30,20 @@ class UserController extends AbstractController
     private $userService;
 
     /**
+     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
+     */
+    private $translator;
+
+    /**
      * UserController constructor.
      *
-     * @param UserService $service user service
+     * @param UserService         $service user service
+     * @param TranslatorInterface $translator
      */
-    public function __construct(UserService $service)
+    public function __construct(UserService $service, TranslatorInterface $translator)
     {
         $this->userService = $service;
+        $this->translator = $translator;
     }
 
     /**
@@ -85,7 +93,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userService->save($usr);
 
-            $this->addFlash('success', 'email has been hanged');
+            $this->addFlash('success', $this->translator->trans('email_updated_msg'));
 
             return $this->redirectToRoute('user_profile', ['id' => $usr->getId()]);
         }
@@ -128,9 +136,9 @@ class UserController extends AbstractController
 
             $status = $this->userService->changePassword($isAdmin, $usr, $newPassword, $oldPassword);
             $flashType = $status ? 'success' : 'danger';
-            $flashMsg = $status ? 'password has been changed' : 'wrong current password';
+            $flashMsg = $status ? 'password_updated_msg' : 'wrong_password_msg';
 
-            $this->addFlash($flashType, $flashMsg);
+            $this->addFlash($flashType, $this->translator->trans($flashMsg));
 
             return $this->redirectToRoute('user_profile', ['id' => $usr->getId()]);
         }
@@ -166,11 +174,11 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $status = $usr->getCanPublish() ? 'user unblocked' : 'user blocked';
+            $status = $usr->getCanPublish() ? 'user_unblocked_msg' : 'user_blocked_msg';
 
             $this->userService->save($usr);
 
-            $this->addFlash('success', $status);
+            $this->addFlash('success', $this->translator->trans($status));
 
             return $this->redirectToRoute('user_profile', ['id' => $usr->getId()]);
         }
@@ -225,7 +233,7 @@ class UserController extends AbstractController
             }
 
             $this->userService->save($usr);
-            $this->addFlash('success', 'User permissions changed.');
+            $this->addFlash('success', $this->translator->trans('permission_updated_msg'));
 
             return $this->redirectToRoute('user_profile', ['id' => $usr->getId()]);
         }

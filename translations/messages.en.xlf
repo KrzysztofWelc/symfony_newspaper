@@ -23,6 +23,27 @@
                 <source>categories_edit</source>
                 <target>Edit category</target>
             </trans-unit>
+            <trans-unit id="category_created_msg">
+                <source>category_created_msg</source>
+                <target>Category created.</target>
+            </trans-unit>
+            <trans-unit id="category_updated_msg">
+                <source>category_updated_msg</source>
+                <target>Category updated</target>
+            </trans-unit>
+            <trans-unit id="category_deleted_msg">
+                <source>category_deleted_msg</source>
+                <target>Category deleted</target>
+            </trans-unit>
+<!--    Tags        -->
+            <trans-unit id="tag_updated_msg">
+                <source>tag_updated_msg</source>
+                <target>Tag updated.</target>
+            </trans-unit>
+            <trans-unit id="tag_deleted_msg">
+                <source>tag_deleted_msg</source>
+                <target>Tag deleted.</target>
+            </trans-unit>
 <!--    Articles        -->
             <trans-unit id="articles">
                 <source>articles</source>
@@ -44,6 +65,18 @@
                 <source>article_edit</source>
                 <target>Edit article</target>
             </trans-unit>
+            <trans-unit id="article_created_msg">
+                <source>article_created_msg</source>
+                <target>Articles created.</target>
+            </trans-unit>
+            <trans-unit id="article_updated_msg">
+                <source>article_updated_msg</source>
+                <target>Article updated.</target>
+            </trans-unit>
+            <trans-unit id="article_deleted_msg">
+                <source>article_deleted_msg</source>
+                <target>Article deleted.</target>
+            </trans-unit>
 <!--    Auth        -->
             <trans-unit id="nav_login">
                 <source>nav_login</source>
@@ -60,9 +93,38 @@
             <trans-unit id="email_change">
                 <source>email_change</source>
                 <target>Change email</target>
-            </trans-unit><trans-unit id="password_change">
+            </trans-unit>
+            <trans-unit id="password_change">
                 <source>password_change</source>
                 <target>Change password</target>
+            </trans-unit>
+            <trans-unit id="email_updated_msg">
+                <source>email_updated_msg</source>
+                <target>Email updated.</target>
+            </trans-unit>
+            <trans-unit id="password_updated_msg">
+                <source>password_updated_msg</source>
+                <target>Password updated.</target>
+            </trans-unit>
+            <trans-unit id="wrong_password_msg">
+                <source>wrong_password_msg</source>
+                <target>Wrong password</target>
+            </trans-unit>
+            <trans-unit id="user_blocked_msg">
+                <source>user_blocked_msg</source>
+                <target>User blocked.</target>
+            </trans-unit>
+            <trans-unit id="user_unblocked_msg">
+                <source>user_unblocked_msg</source>
+                <target>User unblocked.</target>
+            </trans-unit>
+            <trans-unit id="permission_updated_msg">
+                <source>permission_updated_msg</source>
+                <target>Permissions updated.</target>
+            </trans-unit>
+            <trans-unit id="banned_msg">
+                <source>banned_msg</source>
+                <target>You have been banned.</target>
             </trans-unit>
 <!--    General        -->
             <trans-unit id="back">

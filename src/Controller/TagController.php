@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class TagController.
@@ -28,11 +29,20 @@ class TagController extends AbstractController
     private $repository;
 
     /**
-     * TagController constructor.
+     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
      */
-    public function __construct(TagRepository $repository)
+    private $translator;
+
+    /**
+     * TagController constructor.
+     *
+     * @param TagRepository $repository
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TagRepository $repository, TranslatorInterface $translator)
     {
         $this->repository = $repository;
+        $this->translator = $translator;
     }
 
     /**
@@ -87,7 +97,7 @@ class TagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repository->save($tag);
-            $this->addFlash('success', 'tag edited');
+            $this->addFlash('success', $this->translator->trans('tag_updated_msg'));
 
             return $this->redirectToRoute('tag_index');
         }
@@ -128,7 +138,7 @@ class TagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repository->delete($tag);
-            $this->addFlash('success', 'tag deleted');
+            $this->addFlash('success', $this->translator->trans('tag_deleted_msg'));
 
             return $this->redirectToRoute('tag_index');
         }

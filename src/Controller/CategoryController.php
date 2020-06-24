@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class CategoryController.
@@ -25,13 +26,20 @@ class CategoryController extends AbstractController
     private $categoryService;
 
     /**
+     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
+     */
+    private $translator;
+
+    /**
      * CategoryController constructor.
      *
-     * @param CategoryService $categoryService Category service
+     * @param CategoryService     $categoryService Category service
+     * @param TranslatorInterface $translator
      */
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryService $categoryService, TranslatorInterface $translator)
     {
         $this->categoryService = $categoryService;
+        $this->translator = $translator;
     }
 
     /**
@@ -96,7 +104,7 @@ class CategoryController extends AbstractController
     public function create(Request $request): Response
     {
         if (!$this->getUser()->getCanPublish()) {
-            $this->addFlash('danger', 'You are currently blocked.');
+            $this->addFlash('danger', $this->translator->trans('banned_msg'));
 
             return $this->redirectToRoute('article_index');
         }
@@ -107,7 +115,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->categoryService->save($category);
-            $this->addFlash('success', 'category created');
+            $this->addFlash('success', $this->translator->trans('category_created_msg'));
 
             return $this->redirectToRoute('category_index');
         }
@@ -149,7 +157,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->categoryService->delete($category);
-            $this->addFlash('success', 'category deleted');
+            $this->addFlash('success', $this->translator->trans('category_deleted_msg'));
 
             return $this->redirectToRoute('category_index');
         }
@@ -190,7 +198,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->categoryService->save($category);
-            $this->addFlash('success', 'category updated');
+            $this->addFlash('success', $this->translator->trans('category_updated_msg'));
 
             return $this->redirectToRoute('category_index');
         }

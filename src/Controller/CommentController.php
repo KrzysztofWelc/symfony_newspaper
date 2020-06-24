@@ -12,8 +12,10 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 
 /**
  * Comment controller.
@@ -52,10 +54,10 @@ class CommentController extends AbstractController
      *
      * @isGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function add(Request $request, Article $article): Response
+    public function add(Request $request, Article $article, TranslatorInterface $translator): Response
     {
         if (!$this->getUser()->getCanPublish()) {
-            $this->addFlash('danger', 'You are currently blocked.');
+            $this->addFlash('danger', $translator->trans('banned_msg'));
 
             return $this->redirectToRoute('article_index');
         }

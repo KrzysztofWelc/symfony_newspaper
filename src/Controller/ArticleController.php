@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 
 /**
  * Class ArticleController.
@@ -25,11 +27,20 @@ class ArticleController extends AbstractController
     private $articleService;
 
     /**
-     * ArticleController constructor.
+     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
      */
-    public function __construct(ArticleService $articleService)
+    private $translator;
+
+    /**
+     * ArticleController constructor.
+     *
+     * @param ArticleService      $articleService
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(ArticleService $articleService, TranslatorInterface $translator)
     {
         $this->articleService = $articleService;
+        $this->translator = $translator;
     }
 
     /**
@@ -96,7 +107,7 @@ class ArticleController extends AbstractController
     public function create(Request $request): Response
     {
         if (!$this->getUser()->getCanPublish()) {
-            $this->addFlash('danger', 'You are currently blocked.');
+            $this->addFlash('danger', $this->translator->trans('banned_msg'));
 
             return $this->redirectToRoute('article_index');
         }
@@ -107,7 +118,7 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->articleService->save($article, $this->getUser());
-            $this->addFlash('success', 'article created');
+            $this->addFlash('success', $this->translator->trans('article_created_msg'));
 
             return $this->redirectToRoute('article_index');
         }
@@ -146,7 +157,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->articleService->save($article, null);
 
-            $this->addFlash('success', 'article updated');
+            $this->addFlash('success', $this->translator->trans('article_updated_msg'));
 
             return $this->redirectToRoute('article_index');
         }
@@ -191,7 +202,7 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->articleService->delete($article);
-            $this->addFlash('success', 'article deleted');
+            $this->addFlash('success', $this->translator->trans('article_deleted_msg'));
 
             return $this->redirectToRoute('article_index');
         }
