@@ -33,6 +33,18 @@ class TagRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param Tag $tag Objects
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete($tag): void
+    {
+        $this->_em->remove($tag);
+        $this->_em->flush();
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param QueryBuilder|null $queryBuilder Query builder
