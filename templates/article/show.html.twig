@@ -20,7 +20,7 @@
         <small class="text-muted d-block">{{ article.updatedAt|date }}</small>
         <a class="d-block" href={{ url('category_show', {"name": article.category.name}) }}>{{ article.category.name }}</a>
         {% if article.tags is defined and article.tags|length %}
-            <div>tags:
+            <div>{{ 'tags'|trans }}:
                 {% for tag in article.tags %}
                     <a href={{ url('tag_show', {"code": tag.code}) }}>{{ tag.name }}</a>
                 {% endfor %}

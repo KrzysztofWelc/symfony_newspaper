@@ -4,8 +4,8 @@
 
 {% block body %}
     <h1 class="mb-3">tag: {{ tag.name }}</h1>
-    <a href={{ url('tag_edit', {'id': tag.id}) }}>edit</a>
-    <a href={{ url('tag_delete', {'id': tag.id}) }}>delete</a>
+    <a class="btn btn-info" href={{ url('tag_edit', {'id': tag.id}) }}>{{ 'change'|trans }}</a>
+    <a class="btn btn-danger" href={{ url('tag_delete', {'id': tag.id}) }}>{{ 'delete'|trans }}</a>
 
     {% if tag.articles is defined and tag.articles|length %}
         {% for article in tag.articles %}

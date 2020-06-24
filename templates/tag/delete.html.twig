@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    delete tag
+    {{ 'tag_delete'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>delete tag</h1>
+    <h1>{{ 'tag_delete'|trans }}</h1>
     {{ form_start(form, { method: 'DELETE', action: url('tag_delete', {id: tag.id}) }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'article_delete'|trans }}" class="btn btn-primary" />
+        <input type="submit" value="{{ 'change'|trans }}" class="btn btn-primary" />
     </div>
     <div class="form-group row float-sm-left">
         <a href="{{ url('article_index') }}" class="btn btn-link">

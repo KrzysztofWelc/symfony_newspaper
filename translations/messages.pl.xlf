@@ -36,6 +36,14 @@
                 <target>Usunięto kategorię.</target>
             </trans-unit>
             <!--    Tags        -->
+            <trans-unit id="tag_delete">
+                <source>tag_delete</source>
+                <target>Usuń tag</target>
+            </trans-unit>
+            <trans-unit id="tag_edit">
+                <source>tag_edit</source>
+                <target>Edytuj tag</target>
+            </trans-unit>
             <trans-unit id="tag_updated_msg">
                 <source>tag_updated_msg</source>
                 <target>Tag zaktualizowany.</target>
@@ -43,6 +51,10 @@
             <trans-unit id="tag_deleted_msg">
                 <source>tag_deleted_msg</source>
                 <target>Tag usunięty.</target>
+            </trans-unit>
+            <trans-unit id="tag_search_msg">
+                <source>tag_search_msg</source>
+                <target>Wyszukaj tagi</target>
             </trans-unit>
             <!--    Articles        -->
             <trans-unit id="articles">
@@ -126,6 +138,14 @@
                 <source>banned_msg</source>
                 <target>Zostałeś zablokowany.</target>
             </trans-unit>
+            <trans-unit id="change_permissions">
+                <source>change_permissions</source>
+                <target>Zmień uprawnienia.</target>
+            </trans-unit>
+            <trans-unit id="block_user">
+                <source>block_user</source>
+                <target>Zablokuj użytkownika.</target>
+            </trans-unit>
             <!--    General        -->
             <trans-unit id="back">
                 <source>back</source>
@@ -146,6 +166,18 @@
             <trans-unit id="secret">
                 <source>secret</source>
                 <target>sekret</target>
+            </trans-unit>
+            <trans-unit id="tags">
+                <source>tags</source>
+                <target>tagi</target>
+            </trans-unit>
+            <trans-unit id="can_publish">
+                <source>can_publish</source>
+                <target>może publikować?</target>
+            </trans-unit>
+            <trans-unit id="role">
+                <source>role</source>
+                <target>rola</target>
             </trans-unit>
             <!--    Comment        -->
             <trans-unit id="comment">

@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('tag_search') }}">search by tag</a>
+                <a class="nav-link" href="{{ url('tag_search') }}">{{ 'tag_search_msg'|trans }}</a>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
