@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=TagRepository::class)
  * @ORM\Table(name="tags")
  *
- * @UniqueEntity(fields={"title"})
+ * @UniqueEntity(fields={"name"})
  */
 class Tag
 {
@@ -42,11 +42,7 @@ class Tag
      * )
      *
      * @Assert\Type(type="string")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *     min="3",
-     *     max="64",
-     * )
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -57,7 +53,9 @@ class Tag
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="tags")
      *
-     * @Assert\Type(type="Doctrine\Common\Collections\ArrayCollection")
+     * @Assert\All({
+     *  @Assert\Type(type="App\Entity\Article")
+     * })
      */
     private $articles;
 
@@ -72,10 +70,7 @@ class Tag
      * )
      *
      * @Assert\Type(type="string")
-     * @Assert\Length(
-     *     min="3",
-     *     max="64",
-     * )
+     * @Assert\NotBlank()
      *
      * @Gedmo\Slug(fields={"name"})
      */

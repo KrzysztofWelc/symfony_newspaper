@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Tag;
+use App\Form\TagEditType;
 use App\Form\TagSearchType;
 use App\Repository\TagRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -23,6 +24,9 @@ class TagController extends AbstractController
      */
     private $repository;
 
+    /**
+     * TagController constructor.
+     */
     public function __construct(TagRepository $repository)
     {
         $this->repository = $repository;
@@ -30,11 +34,6 @@ class TagController extends AbstractController
 
     /**
      * Tags index.
-     *
-     * @param Request $request
-     * @param PaginatorInterface $paginator
-     *
-     * @return Response
      *
      * @Route("/", name="tag_index")
      */
@@ -58,8 +57,6 @@ class TagController extends AbstractController
      *
      * @param App\Entity\Tag $tag Tag entity
      *
-     * @return Response
-     *
      * @Route("/show/{code}", name="tag_show")
      */
     public function show(Tag $tag): Response
@@ -70,11 +67,39 @@ class TagController extends AbstractController
     }
 
     /**
-     * Search action.
-     *
      * @param Request $request
+     * @param Tag     $tag
      *
      * @return Response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route("/edit/{id}", name="tag_edit")
+     */
+    public function editTag(Request $request, Tag $tag)
+    {
+        $form = $this->createForm(TagEditType::class, $tag, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->repository->save($tag);
+            $this->addFlash('success', 'tag edited');
+
+            return $this->redirectToRoute('tag_index');
+        }
+
+        return $this->render(
+            'tag/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'tag' => $tag,
+            ]
+        );
+    }
+
+    /**
+     * Search action.
      *
      * @Route("/search", name="tag_search")
      */
