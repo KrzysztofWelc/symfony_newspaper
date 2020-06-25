@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Class AdminPwdChangeType.
@@ -36,6 +37,11 @@ class AdminPwdChangeType extends AbstractType
                 'label' => 'new_password_label',
                 'required' => true,
                 'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
             ]
         );
     }
