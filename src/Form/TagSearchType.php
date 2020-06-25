@@ -33,7 +33,7 @@ class TagSearchType extends AbstractType
             'phrase',
             TextType::class,
             [
-                'label' => 'searched phrase',
+                'label' => 'label_name',
                 'mapped' => false,
                 'required' => true,
                 'constraints' => [

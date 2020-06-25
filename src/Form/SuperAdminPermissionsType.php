@@ -32,7 +32,7 @@ class SuperAdminPermissionsType extends AbstractType
             'role',
             ChoiceType::class,
             [
-                'label' => 'Role',
+                'label' => 'role_label',
                 'mapped' => false,
                 'choices' => [
                     'regular' => User::ROLE_USER,

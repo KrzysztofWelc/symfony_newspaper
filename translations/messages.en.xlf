@@ -196,6 +196,59 @@
                 <source>login_to_comment</source>
                 <target>Log in to add comment.</target>
             </trans-unit>
+<!--            labels-->
+            <trans-unit id="permission_label">
+                <source>permission_label</source>
+                <target>role</target>
+            </trans-unit>
+            <trans-unit id="new_password_label">
+                <source>new_password_label</source>
+                <target>new password</target>
+            </trans-unit>
+            <trans-unit id="title_label">
+                <source>title_label</source>
+                <target>title</target>
+            </trans-unit>
+            <trans-unit id="body_label">
+                <source>body_label</source>
+                <target>body</target>
+            </trans-unit>
+            <trans-unit id="tags_label">
+                <source>tags_label</source>
+                <target>tags</target>
+            </trans-unit>
+            <trans-unit id="is_published_label">
+                <source>is_published_label</source>
+                <target>is published</target>
+            </trans-unit>
+            <trans-unit id="category_label">
+                <source>category_label</source>
+                <target>category</target>
+            </trans-unit>
+            <trans-unit id="can_publish_label">
+                <source>can_publish_label</source>
+                <target>can publish</target>
+            </trans-unit>
+            <trans-unit id="label_name">
+                <source>label_name</source>
+                <target>name</target>
+            </trans-unit>
+            <trans-unit id="email_label">
+                <source>email_label</source>
+                <target>email</target>
+            </trans-unit>
+            <trans-unit id="old_password_label">
+                <source>old_password_label</source>
+                <target>old password</target>
+            </trans-unit>
+            <trans-unit id="repeat_password_label">
+                <source>repeat_password_label</source>
+                <target>repeat password</target>
+            </trans-unit>
+            <trans-unit id="terms_label">
+                <source>terms_label</source>
+                <target>Agree terms</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

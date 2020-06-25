@@ -33,7 +33,7 @@ class AdminPwdChangeType extends AbstractType
             'newPassword',
             PasswordType::class,
             [
-                'label' => 'new password',
+                'label' => 'new_password_label',
                 'required' => true,
                 'mapped' => false,
             ]

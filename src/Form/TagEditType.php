@@ -33,7 +33,7 @@ class TagEditType extends AbstractType
             'name',
             TextType::class,
             [
-                'label' => 'name',
+                'label' => 'name_label',
                 'required' => true,
             ]
         );

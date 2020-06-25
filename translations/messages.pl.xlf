@@ -196,6 +196,59 @@
                 <source>login_to_comment</source>
                 <target>Zaloguj się, żeby komentować.</target>
             </trans-unit>
+            <!--            labels-->
+            <trans-unit id="permission_label">
+                <source>permission_label</source>
+                <target>rola</target>
+            </trans-unit>
+            <trans-unit id="new_password_label">
+                <source>new_password_label</source>
+                <target>nowe hasło</target>
+            </trans-unit>
+            <trans-unit id="title_label">
+                <source>title_label</source>
+                <target>tytuł</target>
+            </trans-unit>
+            <trans-unit id="body_label">
+                <source>body_label</source>
+                <target>treść</target>
+            </trans-unit>
+            <trans-unit id="tags_label">
+                <source>tags_label</source>
+                <target>tagi</target>
+            </trans-unit>
+            <trans-unit id="is_published_label">
+                <source>is_published_label</source>
+                <target>publiczny</target>
+            </trans-unit>
+            <trans-unit id="category_label">
+                <source>category_label</source>
+                <target>kategoria</target>
+            </trans-unit>
+            <trans-unit id="can_publish_label">
+                <source>can_publish_label</source>
+                <target>może publikować</target>
+            </trans-unit>
+            <trans-unit id="label_name">
+                <source>label_name</source>
+                <target>nazwa</target>
+            </trans-unit>
+            <trans-unit id="email_label">
+                <source>email_label</source>
+                <target>email</target>
+            </trans-unit>
+            <trans-unit id="old_password_label">
+                <source>old_password_label</source>
+                <target>stare hasło</target>
+            </trans-unit>
+            <trans-unit id="repeat_password_label">
+                <source>repeat_password_label</source>
+                <target>powrtórz hasło</target>
+            </trans-unit>
+            <trans-unit id="terms_label">
+                <source>terms_label</source>
+                <target>Akceptuję zasady portalu</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

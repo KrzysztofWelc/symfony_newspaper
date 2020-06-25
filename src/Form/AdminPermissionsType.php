@@ -29,10 +29,10 @@ class AdminPermissionsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
-            'role',
+            'role_label',
             ChoiceType::class,
             [
-                'label' => 'Role',
+                'label' => 'permission_label',
                 'mapped' => false,
                 'choices' => [
                     'regular' => User::ROLE_USER,

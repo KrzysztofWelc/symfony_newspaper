@@ -56,7 +56,7 @@ class ArticleType extends AbstractType
             'title',
             TextType::class,
             [
-                'label' => 'Name',
+                'label' => 'title_label',
                 'required' => true,
                 'attr' => ['max_length' => 64],
             ]
@@ -65,7 +65,7 @@ class ArticleType extends AbstractType
             'body',
             TextareaType::class,
             [
-                'label' => 'Body',
+                'label' => 'body_label',
                 'required' => true,
                 'attr' => [
                     'rows' => 10,
@@ -76,6 +76,7 @@ class ArticleType extends AbstractType
             'category',
             EntityType::class,
             [
+                'label' => 'category_label',
                 'class' => Category::class,
                 'choice_label' => 'name',
             ]
@@ -84,7 +85,7 @@ class ArticleType extends AbstractType
             'tags',
             TextType::class,
             [
-                'label' => 'tags',
+                'label' => 'tags_label',
                 'required' => false,
                 'attr' => ['max_length' => 128],
             ]
@@ -93,7 +94,7 @@ class ArticleType extends AbstractType
             'isPublished',
             CheckboxType::class,
             [
-                'label' => 'is published',
+                'label' => 'is_published_label',
                 'required' => false,
             ]
         );

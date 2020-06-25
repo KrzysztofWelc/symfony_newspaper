@@ -34,7 +34,7 @@ class CommentType extends AbstractType
                 'body',
                 TextType::class,
                 [
-                    'label' => 'body',
+                    'label' => 'body_label',
                     'required' => true,
                 ]
             );

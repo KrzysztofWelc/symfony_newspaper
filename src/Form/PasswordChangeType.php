@@ -37,7 +37,7 @@ class PasswordChangeType extends AbstractType
             PasswordType::class,
             [
                 'mapped' => false,
-                'label' => 'old password',
+                'label' => 'old_password_label',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -53,8 +53,8 @@ class PasswordChangeType extends AbstractType
                 'mapped' => false,
                 'invalid_message' => 'The password fields must match.',
                 'required' => true,
-                'first_options' => ['label' => 'new password'],
-                'second_options' => ['label' => 'Repeat new password'],
+                'first_options' => ['label' => 'new_password_label'],
+                'second_options' => ['label' => 'repeat_password_label'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',

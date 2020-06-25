@@ -33,7 +33,7 @@ class CredentialsType extends AbstractType
             'email',
             EmailType::class,
             [
-                'label' => 'email',
+                'label' => 'email_label',
                 'required' => true,
                 'attr' => ['max_length' => 64],
             ]

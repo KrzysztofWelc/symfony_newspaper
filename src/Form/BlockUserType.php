@@ -33,7 +33,7 @@ class BlockUserType extends AbstractType
             'canPublish',
             CheckboxType::class,
             [
-                'label' => 'can publish',
+                'label' => 'can_publish_label',
                 'required' => false,
             ]
         );
