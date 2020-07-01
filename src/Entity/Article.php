@@ -158,6 +158,11 @@ class Article
     private $isPublished;
 
     /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $fileName;
+
+    /**
      * Article constructor.
      */
     public function __construct()
@@ -407,6 +412,18 @@ class Article
     public function setIsPublished(bool $isPublished): void
     {
         $this->isPublished = $isPublished;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(?string $fileName): self
+    {
+        $this->fileName = $fileName;
+
+        return $this;
     }
 
 }

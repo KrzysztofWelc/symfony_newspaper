@@ -27,15 +27,22 @@ class ArticleService
     private $paginator;
 
     /**
+     * @var App\Service\FileUploader
+     */
+    private $fileUploader;
+
+    /**
      * ArticleService constructor.
      *
      * @param ArticleRepository  $articleRepository
      * @param PaginatorInterface $paginator
+     * @param FileUploader       $fileUploader
      */
-    public function __construct(ArticleRepository $articleRepository, PaginatorInterface $paginator)
+    public function __construct(ArticleRepository $articleRepository, PaginatorInterface $paginator, FileUploader $fileUploader)
     {
         $this->articleRepository = $articleRepository;
         $this->paginator = $paginator;
+        $this->fileUploader = $fileUploader;
     }
 
     /**
@@ -61,10 +68,14 @@ class ArticleService
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(Article $article, UserInterface $user = null): void
+    public function save(Article $article, UserInterface $user = null, $image): void
     {
         if ($user instanceof UserInterface) {
             $article->setAuthor($user);
+        }
+
+        if($image){
+            $article->setFileName($this->fileUploader->upload($image));
         }
 
         $this->articleRepository->save($article);
