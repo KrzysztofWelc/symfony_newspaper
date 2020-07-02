@@ -8,10 +8,31 @@
             {{ knp_pagination_render(pagination) }}
         </div>
 
-        <ul>
+        <ul class="article_list mt-4">
             {% for article in pagination.items %}
-                <li><a href="{{ url('article_show', {"id": article.id}) }}">{{ article.title }}</a></li>
+                <li>
+                    <a href="{{ url('article_show', {"id": article.id}) }}">
+                        <div class="card">
+                            {% if article.fileName is defined and article.fileName|length %}
+                                <img class="card-img-top" src="{{ asset('uploads/avatars/'~ article.fileName) }}" alt="Card image cap">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title h3">{{ article.title }}</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
             {% endfor %}
         </ul>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+    <script src="{{ asset('js/list.js') }}"></script>
 {% endblock %}

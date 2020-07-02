@@ -13,3 +13,12 @@ label{
     max-height: 450px;
     object-fit: cover;
 }
+.article_list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.article_list img{
+    object-fit: cover;
+    height: 15rem;
+}
