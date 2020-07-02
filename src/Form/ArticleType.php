@@ -64,27 +64,6 @@ class ArticleType extends AbstractType
             ]
         );
         $builder->add(
-            'file',
-            FileType::class,
-            [
-                'mapped' => false,
-                'label' => 'label_avatar',
-                'required' => true,
-                'constraints' => new Image(
-                    [
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/png',
-                            'image/jpeg',
-                            'image/pjpeg',
-                            'image/jpeg',
-                            'image/pjpeg',
-                        ],
-                    ]
-                ),
-            ]
-        );
-        $builder->add(
             'body',
             TextareaType::class,
             [

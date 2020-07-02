@@ -7,8 +7,11 @@ namespace App\Service;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -32,23 +35,23 @@ class ArticleService
     private $fileUploader;
 
     /**
-     * ArticleService constructor.
-     *
-     * @param ArticleRepository  $articleRepository
-     * @param PaginatorInterface $paginator
-     * @param FileUploader       $fileUploader
+     * @var Symfony\Component\Filesystem\Filesystem
      */
-    public function __construct(ArticleRepository $articleRepository, PaginatorInterface $paginator, FileUploader $fileUploader)
+    private $fileSystem;
+
+    /**
+     * ArticleService constructor.
+     */
+    public function __construct(ArticleRepository $articleRepository, PaginatorInterface $paginator, FileUploader $fileUploader, Filesystem $fileSystem)
     {
         $this->articleRepository = $articleRepository;
         $this->paginator = $paginator;
         $this->fileUploader = $fileUploader;
+        $this->fileSystem = $fileSystem;
     }
 
     /**
-     * @param int $page
-     *
-     * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
+     * @return PaginationInterface Paginated list
      */
     public function createPaginatedList(int $page): PaginationInterface
     {
@@ -62,20 +65,15 @@ class ArticleService
     /**
      * Save Article.
      *
-     * @param Article       $article
      * @param UserInterface $user
      *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function save(Article $article, UserInterface $user = null, $image): void
+    public function save(Article $article, UserInterface $user = null): void
     {
         if ($user instanceof UserInterface) {
             $article->setAuthor($user);
-        }
-
-        if($image){
-            $article->setFileName($this->fileUploader->upload($image));
         }
 
         $this->articleRepository->save($article);
@@ -84,12 +82,26 @@ class ArticleService
     /**
      * Delete article.
      *
-     * @param Article $article
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(Article $article): void
     {
         $this->articleRepository->delete($article);
+    }
+
+    /**
+     * set thumbnail.
+     *
+     * @param Article $article
+     * @param $image
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function setThumbnail(Article $article, $image): void
+    {
+        $article->setFileName($this->fileUploader->upload($image));
+        $this->articleRepository->save($article);
     }
 }

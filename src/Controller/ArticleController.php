@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 /**
@@ -117,12 +118,10 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageData = $form->get('file')->getData();
-            $image = isset($imageData) ? $imageData : null;
-            $this->articleService->save($article, $this->getUser(), $image);
+            $this->articleService->save($article, $this->getUser());
             $this->addFlash('success', $this->translator->trans('article_created_msg'));
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('thumbnail_show', ['title' => $article->getTitle()]);
         }
 
         return $this->render(

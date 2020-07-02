@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block body %}
+    {% if article.fileName is defined and article.fileName|length %}
+        <p>obecna miniaturka</p>
+        <img class="nav-profile-img" src="{{ asset('uploads/avatars/'~ article.fileName) }}">
+        <a href="#">zmień</a>
+        <a href="#">usuń</a>
+        <a href={{ url('article_index') }}>pomiń</a>
+    {% else %}
+        <p>dodać miniaturkę?</p>
+        <a href={{ url('thumbnail_add', {'id': article.id}) }}>dodaj</a>
+        <a href={{ url('article_index') }}>pomiń</a>
+    {% endif %}
+{% endblock %}
