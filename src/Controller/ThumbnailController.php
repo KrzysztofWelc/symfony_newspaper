@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Class ThumbnailController.
@@ -59,6 +61,8 @@ class ThumbnailController extends AbstractController
      *
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @Security("is_granted('ROLE_ADMIN') or ( is_granted('ROLE_REDACTOR') and is_granted('EDIT', article) )")
      */
     public function add(Request $request, Article $article): Response
     {
@@ -88,6 +92,8 @@ class ThumbnailController extends AbstractController
      *
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @Security("is_granted('ROLE_ADMIN') or ( is_granted('ROLE_REDACTOR') and is_granted('EDIT', article) )")
      */
     public function edit(Request $request, Article $article): Response
     {
@@ -129,6 +135,7 @@ class ThumbnailController extends AbstractController
      *     name="thumbnail_delete",
      * )
      *
+     * @Security("is_granted('ROLE_ADMIN') or ( is_granted('ROLE_REDACTOR') and is_granted('EDIT', article) )")
      */
     public function delete(Request $request, Article $article): Response
     {
