@@ -13,6 +13,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /*
  * Class CommentService.
  */
+
+/**
+ * Class CommentService.
+ */
 class CommentService
 {
     /**
@@ -22,6 +26,7 @@ class CommentService
 
     /**
      * CommentService constructor.
+     * @param CommentRepository $repository
      */
     public function __construct(CommentRepository $repository)
     {
@@ -30,6 +35,10 @@ class CommentService
 
     /**
      * Save comment.
+     *
+     * @param Comment       $comment
+     * @param Article       $article
+     * @param UserInterface $user
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -49,6 +58,8 @@ class CommentService
 
     /**
      * Delete comment.
+     *
+     * @param Comment $comment
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

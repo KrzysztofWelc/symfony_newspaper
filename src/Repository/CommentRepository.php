@@ -14,6 +14,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommentRepository extends ServiceEntityRepository
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
@@ -22,7 +25,7 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Save record.
      *
-     * @param \App\Entity\Category $comment Comment entity
+     * @param Comment $comment Comment entity
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

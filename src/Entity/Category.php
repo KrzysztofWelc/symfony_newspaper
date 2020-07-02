@@ -55,6 +55,7 @@ class Category
 
     /**
      * Getter for id.
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -63,6 +64,7 @@ class Category
 
     /**
      * Getter for name.
+     * @return string|null
      */
     public function getName(): ?string
     {
@@ -71,6 +73,7 @@ class Category
 
     /**
      * Setter for name.
+     * @param string $name
      */
     public function setName(string $name): void
     {
@@ -89,6 +92,7 @@ class Category
 
     /**
      * Setter for articles.
+     * @param Article $article
      */
     public function addArticle(Article $article): void
     {
@@ -100,6 +104,7 @@ class Category
 
     /**
      * Remove article.
+     * @param Article $article
      */
     public function removeArticle(Article $article): void
     {

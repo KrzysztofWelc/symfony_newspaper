@@ -29,6 +29,8 @@ class CommentController extends AbstractController
 
     /**
      * CommentController constructor.
+     *
+     * @param CommentService $commentService
      */
     public function __construct(CommentService $commentService)
     {
@@ -38,11 +40,14 @@ class CommentController extends AbstractController
     /**
      * Add comment action.
      *
-     * @param Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param App\Entity\Article                       $article Article entity selected by id param form URL
+     * @param Request             $request HTTP request
+     * @param Article             $article Article entity selected by id param form URL
+     * @param TranslatorInterface $translator
      *
      * @return Response HTTP Resposne
      *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      * @Route(
      *     "/{id}/add",
      *     name="comment_add",

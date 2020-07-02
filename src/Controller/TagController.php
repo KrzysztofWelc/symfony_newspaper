@@ -36,6 +36,9 @@ class TagController extends AbstractController
 
     /**
      * TagController constructor.
+     *
+     * @param TagRepository       $repository
+     * @param TranslatorInterface $translator
      */
     public function __construct(TagRepository $repository, TranslatorInterface $translator)
     {
@@ -47,6 +50,11 @@ class TagController extends AbstractController
      * Tags index.
      *
      * @Route("/", name="tag_index")
+     *
+     * @param Request            $request
+     * @param PaginatorInterface $paginator
+     *
+     * @return Response
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
@@ -78,6 +86,9 @@ class TagController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param Tag     $tag
+     *
      * @return Response
      *
      * @throws ORMException
@@ -109,6 +120,11 @@ class TagController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param Tag     $tag
+     *
+     * @return Response
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      *
@@ -150,6 +166,10 @@ class TagController extends AbstractController
      * Search action.
      *
      * @Route("/search", name="tag_search")
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function search(Request $request): Response
     {

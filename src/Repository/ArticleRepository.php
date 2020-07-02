@@ -73,6 +73,8 @@ class ArticleRepository extends ServiceEntityRepository
 
     /**
      * @param User $usr user entity
+     *
+     * @return QueryBuilder
      */
     public function getUsersArticles(User $usr)
     {

@@ -42,7 +42,10 @@ class UserService
     /**
      * UserService constructor.
      *
-     * @param UserRepository $repository User repository
+     * @param UserRepository               $repository User repository
+     * @param ArticleRepository            $articleRepository
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param PaginatorInterface           $paginator
      */
     public function __construct(UserRepository $repository, ArticleRepository $articleRepository, UserPasswordEncoderInterface $passwordEncoder, PaginatorInterface $paginator)
     {
@@ -56,6 +59,9 @@ class UserService
      * Save user.
      *
      * @param User $user user entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function save(User $user): void
     {
@@ -66,11 +72,13 @@ class UserService
      * Change password.
      *
      * @param bool   $isAdmin User status
-     * @param User   $user    User entity
-     * @param string $new     new password
-     * @param string $old     old password
+     * @param User   $user User entity
+     * @param string $new new password
+     * @param string $old old password
      *
      * @return bool success status
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function changePassword(bool $isAdmin, User $user, string $new, ?string $old): bool
     {
@@ -99,6 +107,9 @@ class UserService
     }
 
     /**
+     * @param int  $page
+     * @param User $usr
+     *
      * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
      */
     public function createPaginatedArticlesList(int $page, User $usr): PaginationInterface

@@ -41,6 +41,11 @@ class ArticleService
 
     /**
      * ArticleService constructor.
+     *
+     * @param ArticleRepository  $articleRepository
+     * @param PaginatorInterface $paginator
+     * @param FileUploader       $fileUploader
+     * @param Filesystem         $fileSystem
      */
     public function __construct(ArticleRepository $articleRepository, PaginatorInterface $paginator, FileUploader $fileUploader, Filesystem $fileSystem)
     {
@@ -51,6 +56,10 @@ class ArticleService
     }
 
     /**
+     * create paginated list.
+     *
+     * @param int $page
+     *
      * @return PaginationInterface Paginated list
      */
     public function createPaginatedList(int $page): PaginationInterface
@@ -65,6 +74,7 @@ class ArticleService
     /**
      * Save Article.
      *
+     * @param Article       $article
      * @param UserInterface $user
      *
      * @throws ORMException
@@ -82,6 +92,9 @@ class ArticleService
     /**
      * Delete article.
      *
+     * @param Article $article
+     * @param string  $directory
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -96,7 +109,9 @@ class ArticleService
     /**
      * set thumbnail.
      *
-     * @param $image
+     * @param Article $article
+     * @param         $image
+     * @param         $directory
      *
      * @throws ORMException
      * @throws OptimisticLockException
@@ -114,6 +129,9 @@ class ArticleService
 
     /**
      * delete thumbnail.
+     *
+     * @param Article $article
+     * @param string  $directory
      *
      * @throws ORMException
      * @throws OptimisticLockException

@@ -57,6 +57,7 @@ class Comment
 
     /**
      * Getter for id.
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -65,6 +66,7 @@ class Comment
 
     /**
      * Getter for body.
+     * @return string|null
      */
     public function getBody(): ?string
     {
@@ -73,6 +75,7 @@ class Comment
 
     /**
      * Setter for body.
+     * @param string $body
      */
     public function setBody(string $body): void
     {
@@ -81,6 +84,7 @@ class Comment
 
     /**
      * Getter for article.
+     * @return Article|null
      */
     public function getArticle(): ?Article
     {
@@ -89,6 +93,7 @@ class Comment
 
     /**
      * Setter for article.
+     * @param Article|null $article
      */
     public function setArticle(?Article $article): void
     {
@@ -97,6 +102,7 @@ class Comment
 
     /**
      * Getter for createdAt.
+     * @return DateTimeInterface|null
      */
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -105,6 +111,7 @@ class Comment
 
     /**
      * Setter for createdAt.
+     * @param DateTimeInterface $createdAt
      */
     public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
@@ -113,6 +120,7 @@ class Comment
 
     /**
      * Getter for author.
+     * @return User|null
      */
     public function getAuthor(): ?User
     {
@@ -121,6 +129,7 @@ class Comment
 
     /**
      * Setter for author.
+     * @param User|null $author
      */
     public function setAuthor(?User $author): void
     {

@@ -32,6 +32,9 @@ class ArticleController extends AbstractController
 
     /**
      * ArticleController constructor.
+     *
+     * @param ArticleService      $articleService
+     * @param TranslatorInterface $translator
      */
     public function __construct(ArticleService $articleService, TranslatorInterface $translator)
     {

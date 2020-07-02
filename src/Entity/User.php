@@ -137,6 +137,7 @@ class User implements UserInterface
 
     /**
      * Setter for the Email.
+     * @param string $email
      */
     public function setEmail(string $email): void
     {
@@ -222,6 +223,7 @@ class User implements UserInterface
 
     /**
      * Getter for cnaPublish.
+     * @return bool|null
      */
     public function getCanPublish(): ?bool
     {
@@ -230,6 +232,7 @@ class User implements UserInterface
 
     /**
      * Setter for canPublish.
+     * @param bool $canPublish
      */
     public function setCanPublish(bool $canPublish): void
     {

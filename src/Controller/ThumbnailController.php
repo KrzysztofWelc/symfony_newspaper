@@ -34,6 +34,9 @@ class ThumbnailController extends AbstractController
 
     /**
      * ThumbnailController constructor.
+     *
+     * @param ArticleService      $articleService
+     * @param TranslatorInterface $translator
      */
     public function __construct(ArticleService $articleService, TranslatorInterface $translator)
     {
@@ -45,6 +48,10 @@ class ThumbnailController extends AbstractController
      * show action.
      *
      * @Route("/show/{title}", name="thumbnail_show")
+     *
+     * @param Article $article
+     *
+     * @return Response
      */
     public function show(Article $article)
     {
@@ -57,6 +64,11 @@ class ThumbnailController extends AbstractController
      * add action.
      *
      * @Route("/add/{id}", name="thumbnail_add")
+     *
+     * @param Request $request
+     * @param Article $article
+     *
+     * @return Response
      *
      * @throws ORMException
      * @throws OptimisticLockException
@@ -86,6 +98,11 @@ class ThumbnailController extends AbstractController
      * edit action.
      *
      * @Route("/edit/{id}", name="thumbnail_edit")
+     *
+     * @param Request $request
+     * @param Article $article
+     *
+     * @return Response
      *
      * @throws ORMException
      * @throws OptimisticLockException
