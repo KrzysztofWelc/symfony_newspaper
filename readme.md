@@ -1,6 +1,8 @@
 # Symfony Newspaper
 My assignment project SI classes.
 
+docs: https://krzysztofwelc.github.io/symfony_newspaper/
+
 ## installation
 
 ```bash
