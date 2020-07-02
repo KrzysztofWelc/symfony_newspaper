@@ -19,7 +19,7 @@
         <h1 class="h1">{{ article.title }}</h1>
 
         {% if article.fileName is defined and article.fileName|length %}
-            <img class="nav-profile-img d-block my-3" src="{{ asset('uploads/avatars/'~ article.fileName) }}">
+            <img class="nav-profile-img d-block my-3 thumbnail" src="{{ asset('uploads/avatars/'~ article.fileName) }}">
         {% endif %}
 
         <strong class="text-primary d-block"><a href={{ url('user_profile', {'id': article.author.id}) }}>{{ article.author.email }}</a></strong>

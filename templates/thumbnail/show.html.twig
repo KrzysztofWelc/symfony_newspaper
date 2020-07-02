@@ -7,13 +7,17 @@
 {% block body %}
     {% if article.fileName is defined and article.fileName|length %}
         <p>obecna miniaturka</p>
-        <img class="nav-profile-img" src="{{ asset('uploads/avatars/'~ article.fileName) }}">
-        <a href={{ url('thumbnail_edit', {'id': article.id}) }}>zmień</a>
-        <a href={{ url('thumbnail_delete', {'id': article.id}) }}>usuń</a>
-        <a href={{ url('article_index') }}>pomiń</a>
+        <img class="nav-profile-img thumbnail" src="{{ asset('uploads/avatars/'~ article.fileName) }}">
+        <div class="my-4">
+            <a class="btn btn-primary" href={{ url('thumbnail_edit', {'id': article.id}) }}>zmień</a>
+            <a class="btn btn-danger" href={{ url('thumbnail_delete', {'id': article.id}) }}>usuń</a>
+            <a class="btn btn-info" href={{ url('article_index') }}>pomiń</a>
+        </div>
     {% else %}
         <p>dodać miniaturkę?</p>
-        <a href={{ url('thumbnail_add', {'id': article.id}) }}>dodaj</a>
-        <a href={{ url('article_index') }}>pomiń</a>
+        <div class="mb-4">
+            <a class="btn btn-primary" href={{ url('thumbnail_add', {'id': article.id}) }}>dodaj</a>
+            <a class="btn btn-info" href={{ url('article_index') }}>pomiń</a>
+        </div>
     {% endif %}
 {% endblock %}
