@@ -202,7 +202,8 @@ class ArticleController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->articleService->delete($article);
+            $imagesDirectory = $this->getParameter('avatars_directory');
+            $this->articleService->delete($article, $imagesDirectory);
             $this->addFlash('success', $this->translator->trans('article_deleted_msg'));
 
             return $this->redirectToRoute('article_index');

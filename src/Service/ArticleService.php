@@ -82,11 +82,17 @@ class ArticleService
     /**
      * Delete article.
      *
+     * @param Article $article
+     * @param string  $directory
+     *
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function delete(Article $article): void
+    public function delete(Article $article, string $directory): void
     {
+        $this->fileSystem->remove(
+            $directory.'/'.$article->getFileName()
+        );
         $this->articleRepository->delete($article);
     }
 
