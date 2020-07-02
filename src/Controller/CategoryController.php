@@ -5,12 +5,12 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Service\CategoryService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -26,15 +26,14 @@ class CategoryController extends AbstractController
     private $categoryService;
 
     /**
-     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
+     * @var Symfony\Contracts\Translation\TranslatorInterface translator Interface
      */
     private $translator;
 
     /**
      * CategoryController constructor.
      *
-     * @param CategoryService     $categoryService Category service
-     * @param TranslatorInterface $translator
+     * @param CategoryService $categoryService Category service
      */
     public function __construct(CategoryService $categoryService, TranslatorInterface $translator)
     {
@@ -60,8 +59,8 @@ class CategoryController extends AbstractController
     /**
      * Show action.
      *
-     * @param App\Entity\Category                      $category  Category entity
-     * @param Symfony\Component\HttpFoundation\Request $request   HTTP request
+     * @param App\Entity\Category                      $category Category entity
+     * @param Symfony\Component\HttpFoundation\Request $request  HTTP request
      *
      * @return Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -86,7 +85,7 @@ class CategoryController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -129,8 +128,8 @@ class CategoryController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Category                      $category           Category entity
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Category                      $category Category entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -174,8 +173,8 @@ class CategoryController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Category                      $category           Article entity
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Category                      $category Article entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

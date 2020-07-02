@@ -22,7 +22,6 @@ class CommentService
 
     /**
      * CommentService constructor.
-     * @param CommentRepository $repository
      */
     public function __construct(CommentRepository $repository)
     {
@@ -32,18 +31,14 @@ class CommentService
     /**
      * Save comment.
      *
-     * @param Comment $comment
-     * @param Article $article
-     * @param UserInterface $user
-     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function save(Comment $comment, Article $article, UserInterface $user): void
     {
-        if($comment instanceof  Comment){
-            if ($article instanceof Article){
-                if($user instanceof UserInterface){
+        if ($comment instanceof  Comment) {
+            if ($article instanceof Article) {
+                if ($user instanceof UserInterface) {
                     $comment->setAuthor($user);
                     $comment->setArticle($article);
                     $this->commentRepository->save($comment);
@@ -55,7 +50,6 @@ class CommentService
     /**
      * Delete comment.
      *
-     * @param Comment $comment
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

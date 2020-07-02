@@ -7,14 +7,13 @@ use App\Form\ThumbnailType;
 use App\Service\ArticleService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 
 /**
  * Class ThumbnailController.
@@ -29,7 +28,7 @@ class ThumbnailController extends AbstractController
     private $articleService;
 
     /**
-     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
+     * @var Symfony\Contracts\Translation\TranslatorInterface translator Interface
      */
     private $translator;
 
@@ -74,15 +73,13 @@ class ThumbnailController extends AbstractController
             $this->articleService->setThumbnail($article, $image);
             $this->addFlash('success', $this->translator->trans('thumbnail_added_msg'));
 
-
             return $this->redirectToRoute('article_index');
         }
 
         return $this->render('thumbnail/add.html.twig', [
                 'form' => $form->createView(),
                 'id' => $article->getId(),
-            ]
-        );
+        ]);
     }
 
     /**
@@ -106,15 +103,13 @@ class ThumbnailController extends AbstractController
             $this->articleService->setThumbnail($article, $image, $imagesDirectory);
             $this->addFlash('success', $this->translator->trans('thumbnail_edited_msg'));
 
-
             return $this->redirectToRoute('article_index');
         }
 
         return $this->render('thumbnail/edit.html.twig', [
                 'form' => $form->createView(),
                 'id' => $article->getId(),
-            ]
-        );
+        ]);
     }
 
     /**
@@ -150,7 +145,6 @@ class ThumbnailController extends AbstractController
             $imagesDirectory = $this->getParameter('avatars_directory');
             $this->articleService->deleteThumbnail($article, $imagesDirectory);
             $this->addFlash('success', $this->translator->trans('thumbnail_deleted_msg'));
-
 
             return $this->redirectToRoute('article_index');
         }

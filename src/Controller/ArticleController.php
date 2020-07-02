@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\HttpFoundation\File\File;
-
 
 /**
  * Class ArticleController.
@@ -28,15 +26,12 @@ class ArticleController extends AbstractController
     private $articleService;
 
     /**
-     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
+     * @var Symfony\Contracts\Translation\TranslatorInterface translator Interface
      */
     private $translator;
 
     /**
      * ArticleController constructor.
-     *
-     * @param ArticleService      $articleService
-     * @param TranslatorInterface $translator
      */
     public function __construct(ArticleService $articleService, TranslatorInterface $translator)
     {
@@ -47,8 +42,7 @@ class ArticleController extends AbstractController
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
-     * @param \App\Repository\ArticleRepository         $repository task repository
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -71,6 +65,7 @@ class ArticleController extends AbstractController
      * @throws \Doctrine\ORM\OptimisticLockException
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
      * @Route(
      *     "/show/{id}",
      *     name="article_show",

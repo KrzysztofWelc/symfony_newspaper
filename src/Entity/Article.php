@@ -119,7 +119,6 @@ class Article
      * @Assert\All({
      *   @Assert\Type(type="App\Entity\Comment")
      * })
-     *
      */
     private $comments;
 
@@ -173,8 +172,6 @@ class Article
 
     /**
      * Getter fot id.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -183,8 +180,6 @@ class Article
 
     /**
      * Getter fot title.
-     *
-     * @return string|null
      */
     public function getTitle(): ?string
     {
@@ -193,8 +188,6 @@ class Article
 
     /**
      * Setter for title.
-     *
-     * @param string $title
      */
     public function setTitle(string $title): void
     {
@@ -203,8 +196,6 @@ class Article
 
     /**
      * Getter for body.
-     *
-     * @return string|null
      */
     public function getBody(): ?string
     {
@@ -213,8 +204,6 @@ class Article
 
     /**
      * Setter for body.
-     *
-     * @param string $body
      */
     public function setBody(string $body): void
     {
@@ -223,8 +212,6 @@ class Article
 
     /**
      * Getter for createdAt.
-     *
-     * @return DateTimeInterface|null
      */
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -233,8 +220,6 @@ class Article
 
     /**
      * Setter for createdAt.
-     *
-     * @param DateTimeInterface $createdAt
      */
     public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
@@ -243,8 +228,6 @@ class Article
 
     /**
      * Getter for category.
-     *
-     * @return Category|null
      */
     public function getCategory(): ?Category
     {
@@ -253,8 +236,6 @@ class Article
 
     /**
      * Setter for category.
-     *
-     * @param Category|null $category
      */
     public function setCategory(?Category $category): void
     {
@@ -273,8 +254,6 @@ class Article
 
     /**
      * Setter for comments.
-     *
-     * @param Comment $comment
      */
     public function addComment(Comment $comment): void
     {
@@ -286,8 +265,6 @@ class Article
 
     /**
      * Remove Comment.
-     *
-     * @param Comment $comment
      */
     public function removeComment(Comment $comment): void
     {
@@ -302,8 +279,6 @@ class Article
 
     /**
      * Getter for updatedAt.
-     *
-     * @return DateTimeInterface|null
      */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
@@ -312,8 +287,6 @@ class Article
 
     /**
      * Setter for updated at.
-     *
-     * @param DateTimeInterface $updatedAt
      */
     public function setUpdatedAt(\DateTimeInterface $updatedAt): void
     {
@@ -322,8 +295,6 @@ class Article
 
     /**
      * Getter for code.
-     *
-     * @return string|null
      */
     public function getCode(): ?string
     {
@@ -332,8 +303,6 @@ class Article
 
     /**
      * Setter for code.
-     *
-     * @param string $code
      */
     public function setCode(string $code): void
     {
@@ -352,8 +321,6 @@ class Article
 
     /**
      * Setter for tags.
-     *
-     * @param Tag $tag
      */
     public function addTag(Tag $tag): void
     {
@@ -364,8 +331,6 @@ class Article
 
     /**
      * Setter for tags.
-     *
-     * @param Tag $tag
      */
     public function removeTag(Tag $tag): void
     {
@@ -376,8 +341,6 @@ class Article
 
     /**
      * Getter for author.
-     *
-     * @return User|null
      */
     public function getAuthor(): ?User
     {
@@ -386,8 +349,6 @@ class Article
 
     /**
      * Setter for author.
-     *
-     * @param User|null $author
      */
     public function setAuthor(?User $author): void
     {
@@ -396,8 +357,6 @@ class Article
 
     /**
      * Getter for isPublished.
-     *
-     * @return bool|null
      */
     public function getIsPublished(): ?bool
     {
@@ -406,8 +365,6 @@ class Article
 
     /**
      * Setter for isPublished.
-     *
-     * @param bool $isPublished
      */
     public function setIsPublished(bool $isPublished): void
     {
@@ -425,5 +382,4 @@ class Article
 
         return $this;
     }
-
 }

@@ -9,14 +9,13 @@ use App\Repository\TagRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
 
 /**
  * Class TagController.
@@ -31,15 +30,12 @@ class TagController extends AbstractController
     private $repository;
 
     /**
-     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
+     * @var Symfony\Contracts\Translation\TranslatorInterface translator Interface
      */
     private $translator;
 
     /**
      * TagController constructor.
-     *
-     * @param TagRepository $repository
-     * @param TranslatorInterface $translator
      */
     public function __construct(TagRepository $repository, TranslatorInterface $translator)
     {
@@ -82,9 +78,6 @@ class TagController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @param Tag $tag
-     *
      * @return Response
      *
      * @throws ORMException
@@ -116,11 +109,6 @@ class TagController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @param Tag     $tag
-     *
-     * @return Response
-     *
      * @throws ORMException
      * @throws OptimisticLockException
      *

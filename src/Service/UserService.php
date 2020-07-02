@@ -6,8 +6,8 @@
 namespace App\Service;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\UserRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -43,11 +43,8 @@ class UserService
      * UserService constructor.
      *
      * @param UserRepository $repository User repository
-     * @param ArticleRepository $articleRepository
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param PaginatorInterface $paginator
      */
-    public function __construct(UserRepository $repository,ArticleRepository $articleRepository, UserPasswordEncoderInterface $passwordEncoder, PaginatorInterface $paginator)
+    public function __construct(UserRepository $repository, ArticleRepository $articleRepository, UserPasswordEncoderInterface $passwordEncoder, PaginatorInterface $paginator)
     {
         $this->userRepository = $repository;
         $this->articleRepository = $articleRepository;
@@ -102,9 +99,6 @@ class UserService
     }
 
     /**
-     * @param int $page
-     * @param User $usr
-     *
      * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
      */
     public function createPaginatedArticlesList(int $page, User $usr): PaginationInterface

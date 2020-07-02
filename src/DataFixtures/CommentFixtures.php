@@ -6,8 +6,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Comment;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * Class CommentFixtures.

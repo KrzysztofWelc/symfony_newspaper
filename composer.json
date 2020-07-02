@@ -75,10 +75,16 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@phpcs-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@phpcs-scripts"
+        ],
+        "phpcs-scripts": [
+            "vendor/bin/phpcs --config-set installed_paths $(realpath vendor/escapestudios/symfony4-coding-standard)",
+            "vendor/bin/phpcs --config-set default_standard Symfony"
         ]
     },
     "conflict": {

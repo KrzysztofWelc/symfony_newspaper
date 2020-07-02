@@ -30,15 +30,14 @@ class UserController extends AbstractController
     private $userService;
 
     /**
-     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
+     * @var Symfony\Contracts\Translation\TranslatorInterface translator Interface
      */
     private $translator;
 
     /**
      * UserController constructor.
      *
-     * @param UserService         $service user service
-     * @param TranslatorInterface $translator
+     * @param UserService $service user service
      */
     public function __construct(UserService $service, TranslatorInterface $translator)
     {
@@ -55,7 +54,6 @@ class UserController extends AbstractController
      * @return Response HTTP response
      *
      * @Route("/profile/{id}", name="user_profile")
-     *
      */
     public function profile(Request $request, User $usr): Response
     {

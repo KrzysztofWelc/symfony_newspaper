@@ -6,8 +6,8 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -55,8 +55,6 @@ class Category
 
     /**
      * Getter for id.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -65,8 +63,6 @@ class Category
 
     /**
      * Getter for name.
-     *
-     * @return string|null
      */
     public function getName(): ?string
     {
@@ -75,8 +71,6 @@ class Category
 
     /**
      * Setter for name.
-     *
-     * @param string $name
      */
     public function setName(string $name): void
     {
@@ -95,8 +89,6 @@ class Category
 
     /**
      * Setter for articles.
-     *
-     * @param Article $article
      */
     public function addArticle(Article $article): void
     {
@@ -108,8 +100,6 @@ class Category
 
     /**
      * Remove article.
-     *
-     * @param Article $article
      */
     public function removeArticle(Article $article): void
     {

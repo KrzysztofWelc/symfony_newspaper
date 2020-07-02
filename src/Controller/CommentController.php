@@ -5,17 +5,15 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Repository\CommentRepository;
 use App\Service\CommentService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
-
 
 /**
  * Comment controller.
@@ -31,7 +29,6 @@ class CommentController extends AbstractController
 
     /**
      * CommentController constructor.
-     * @param CommentService $commentService
      */
     public function __construct(CommentService $commentService)
     {
@@ -41,8 +38,8 @@ class CommentController extends AbstractController
     /**
      * Add comment action.
      *
-     * @param Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param App\Entity\Article                       $article           Article entity selected by id param form URL
+     * @param Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param App\Entity\Article                       $article Article entity selected by id param form URL
      *
      * @return Response HTTP Resposne
      *
@@ -84,8 +81,6 @@ class CommentController extends AbstractController
     /**
      * @param Request $request http request
      * @param Comment $comment comment entity
-     *
-     * @return Response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

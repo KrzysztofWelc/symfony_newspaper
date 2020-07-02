@@ -171,6 +171,10 @@
                 <source>tags</source>
                 <target>tagi</target>
             </trans-unit>
+            <trans-unit id="tag">
+                <source>tag</source>
+                <target>tag</target>
+            </trans-unit>
             <trans-unit id="can_publish">
                 <source>can_publish</source>
                 <target>może publikować?</target>
@@ -293,6 +297,10 @@
             <trans-unit id="label_avatar">
                 <source>label_avatar</source>
                 <target>Miniatura</target>
+            </trans-unit>
+            <trans-unit id="message_empty_list">
+                <source>message_empty_list</source>
+                <target>Pusta lista</target>
             </trans-unit>
         </body>
     </file>
