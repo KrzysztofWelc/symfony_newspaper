@@ -249,6 +249,51 @@
                 <source>terms_label</source>
                 <target>Akceptuję zasady portalu</target>
             </trans-unit>
+            <!--            thumbnails-->
+            <trans-unit id="current_thumbnail">
+                <source>current_thumbnail</source>
+                <target>Obecna miniaturka</target>
+            </trans-unit>
+            <trans-unit id="add">
+                <source>add</source>
+                <target>Dodaj</target>
+            </trans-unit>
+            <trans-unit id="skip">
+                <source>skip</source>
+                <target>Pomiń</target>
+            </trans-unit>
+            <trans-unit id="give_up">
+                <source>give_up</source>
+                <target>Zrezygnuj</target>
+            </trans-unit>
+            <trans-unit id="edit_thumbnail">
+                <source>edit_thumbnail</source>
+                <target>Zmień miniturkę</target>
+            </trans-unit>
+            <trans-unit id="delete_thumbnail">
+                <source>delete_thumbnail</source>
+                <target>Usuń miniturkę</target>
+            </trans-unit>
+            <trans-unit id="add_thumbnail">
+                <source>add_thumbnail</source>
+                <target>Dodaj miniturkę</target>
+            </trans-unit>
+            <trans-unit id="thumbnail_added_msg">
+                <source>thumbnail_added_msg</source>
+                <target>Miniatura dodana</target>
+            </trans-unit>
+            <trans-unit id="thumbnail_edited_msg">
+                <source>thumbnail_edited_msg</source>
+                <target>Miniatura zmieniona</target>
+            </trans-unit>
+            <trans-unit id="thumbnail_deleted_msg">
+                <source>thumbnail_deleted_msg</source>
+                <target>Miniatura usunięta</target>
+            </trans-unit>
+            <trans-unit id="label_avatar">
+                <source>label_avatar</source>
+                <target>Miniatura</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

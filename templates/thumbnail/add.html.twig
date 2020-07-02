@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'article_add'|trans }}
+    {{ 'add_thumbnail'|trans }}
 {% endblock %}
 
 {% block body %}
     <div class="card mt-5">
         <div class="card-body">
-            <div class="card-title">dodaj miniaturkę</div>
+            <div class="card-title">{{ 'add_thumbnail'|trans }}</div>
 
             {{ form_start(form, { method: 'POST', action: url('thumbnail_add', {"id": id}) }) }}
             {{ form_widget(form) }}
             <div class="form-group row float-sm-right">
-                <input type="submit" value="dodaj miniaturkę" class="btn btn-primary" />
+                <input type="submit" value="{{ 'add_thumbnail'|trans }}" class="btn btn-primary" />
             </div>
             <div class="form-group row float-sm-left">
                 <a href="{{ url('article_index') }}" class="btn btn-link">
-                    zrezygnuj
+                    {{ 'give_up'|trans }}
                 </a>
             </div>
             {{ form_end(form) }}

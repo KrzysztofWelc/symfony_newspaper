@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ThumbnailController.
@@ -26,11 +27,17 @@ class ThumbnailController extends AbstractController
     private $articleService;
 
     /**
+     * @var Symfony\Contracts\Translation\TranslatorInterface Translator Interface.
+     */
+    private $translator;
+
+    /**
      * ThumbnailController constructor.
      */
-    public function __construct(ArticleService $articleService)
+    public function __construct(ArticleService $articleService, TranslatorInterface $translator)
     {
         $this->articleService = $articleService;
+        $this->translator = $translator;
     }
 
     /**
@@ -61,6 +68,8 @@ class ThumbnailController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('file')->getData();
             $this->articleService->setThumbnail($article, $image);
+            $this->addFlash('success', $this->translator->trans('thumbnail_added_msg'));
+
 
             return $this->redirectToRoute('article_index');
         }
@@ -89,6 +98,8 @@ class ThumbnailController extends AbstractController
             $image = $form->get('file')->getData();
             $imagesDirectory = $this->getParameter('avatars_directory');
             $this->articleService->setThumbnail($article, $image, $imagesDirectory);
+            $this->addFlash('success', $this->translator->trans('thumbnail_edited_msg'));
+
 
             return $this->redirectToRoute('article_index');
         }
@@ -131,6 +142,8 @@ class ThumbnailController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imagesDirectory = $this->getParameter('avatars_directory');
             $this->articleService->deleteThumbnail($article, $imagesDirectory);
+            $this->addFlash('success', $this->translator->trans('thumbnail_deleted_msg'));
+
 
             return $this->redirectToRoute('article_index');
         }
