@@ -99,9 +99,32 @@ class ArticleService
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function setThumbnail(Article $article, $image): void
+    public function setThumbnail(Article $article, $image, $directory = null): void
     {
+        if($article->getFileName() && $directory){
+            $this->fileSystem->remove(
+                $directory.'/'.$article->getFileName()
+            );
+        }
         $article->setFileName($this->fileUploader->upload($image));
+        $this->articleRepository->save($article);
+    }
+
+    /**
+     * delete thumbnail.
+     *
+     * @param Article $article
+     * @param string  $directory
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function deleteThumbnail(Article $article, string $directory): void
+    {
+        $this->fileSystem->remove(
+            $directory.'/'.$article->getFileName()
+        );
+        $article->setFileName(null);
         $this->articleRepository->save($article);
     }
 }

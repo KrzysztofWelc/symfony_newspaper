@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ThumbnailType;
 use App\Service\ArticleService;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,8 +27,6 @@ class ThumbnailController extends AbstractController
 
     /**
      * ThumbnailController constructor.
-     *
-     * @param ArticleService $articleService
      */
     public function __construct(ArticleService $articleService)
     {
@@ -49,13 +50,8 @@ class ThumbnailController extends AbstractController
      *
      * @Route("/add/{id}", name="thumbnail_add")
      *
-     * @param Request $request
-     * @param Article $article
-     *
-     * @return Response
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function add(Request $request, Article $article): Response
     {
@@ -71,7 +67,79 @@ class ThumbnailController extends AbstractController
 
         return $this->render('thumbnail/add.html.twig', [
                 'form' => $form->createView(),
-                'id' => $article->getId()
+                'id' => $article->getId(),
+            ]
+        );
+    }
+
+    /**
+     * edit action.
+     *
+     * @Route("/edit/{id}", name="thumbnail_edit")
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function edit(Request $request, Article $article): Response
+    {
+        $form = $this->createForm(ThumbnailType::class, null);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('file')->getData();
+            $imagesDirectory = $this->getParameter('avatars_directory');
+            $this->articleService->setThumbnail($article, $image, $imagesDirectory);
+
+            return $this->redirectToRoute('article_index');
+        }
+
+        return $this->render('thumbnail/edit.html.twig', [
+                'form' => $form->createView(),
+                'id' => $article->getId(),
+            ]
+        );
+    }
+
+    /**
+     * Delete action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Article                       $article Article entity
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/delete/{id}",
+     *     methods={"GET", "DELETE"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="thumbnail_delete",
+     * )
+     *
+     */
+    public function delete(Request $request, Article $article): Response
+    {
+        $form = $this->createForm(FormType::class, null, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imagesDirectory = $this->getParameter('avatars_directory');
+            $this->articleService->deleteThumbnail($article, $imagesDirectory);
+
+            return $this->redirectToRoute('article_index');
+        }
+
+        return $this->render(
+            'thumbnail/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'article' => $article,
             ]
         );
     }

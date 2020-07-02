@@ -160,7 +160,7 @@ class ArticleController extends AbstractController
 
             $this->addFlash('success', $this->translator->trans('article_updated_msg'));
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('thumbnail_show', ['title' => $article->getTitle()]);
         }
 
         return $this->render(
