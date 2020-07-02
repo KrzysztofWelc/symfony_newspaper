@@ -132,7 +132,6 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $oldPassword = $isAdmin ? null : $form->get('oldPassword')->getData();
             $newPassword = $form->get('newPassword')->getData();
-            dump($usr);
 
             $status = $this->userService->changePassword($isAdmin, $usr, $newPassword, $oldPassword);
             $flashType = $status ? 'success' : 'danger';

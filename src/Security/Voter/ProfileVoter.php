@@ -62,8 +62,6 @@ class ProfileVoter extends Voter
             return false;
         }
 
-        dump($subject);
-
         switch ($attribute) {
             case 'EDIT':
                 if ($subject->getId() === $user->getId()) {

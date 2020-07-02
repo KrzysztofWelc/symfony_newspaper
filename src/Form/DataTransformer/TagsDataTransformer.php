@@ -48,7 +48,6 @@ class TagsDataTransformer implements DataTransformerInterface
         }
 
         $result = implode(',', $tagNames);
-        dump($result);
 
         return $result;
     }
