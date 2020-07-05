@@ -20,21 +20,25 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class ArticleService
 {
     /**
+     * Article repository.
      * @var App\Repository\ArticleRepository
      */
     private $articleRepository;
 
     /**
+     * Paginator interface.
      * @var Knp\Component\Pager\PaginatorInterface
      */
     private $paginator;
 
     /**
+     * File uploader.
      * @var App\Service\FileUploader
      */
     private $fileUploader;
 
     /**
+     * File system.
      * @var Symfony\Component\Filesystem\Filesystem
      */
     private $fileSystem;

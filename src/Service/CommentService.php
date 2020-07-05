@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class CommentService
 {
     /**
+     * Comment Repository.
      * @var App\Repository\CommentRepository
      */
     private $commentRepository;

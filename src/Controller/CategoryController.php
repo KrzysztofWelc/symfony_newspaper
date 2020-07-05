@@ -1,4 +1,7 @@
 <?php
+/**
+ * Category controller.
+ */
 
 namespace App\Controller;
 
@@ -60,12 +63,12 @@ class CategoryController extends AbstractController
     /**
      * Show action.
      *
-     * @param App\Entity\Category                      $category Category entity
-     * @param Symfony\Component\HttpFoundation\Request $request  HTTP request
-     *
-     * @return Symfony\Component\HttpFoundation\Response HTTP response
-     *
      * @Route("/show/{name}", name="category_show")
+     *
+     * @param Request  $request
+     * @param Category $category
+     *
+     * @return Response
      */
     public function show(Request $request, Category $category): Response
     {

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Thumbnail Controller.
+ */
 
 namespace App\Controller;
 

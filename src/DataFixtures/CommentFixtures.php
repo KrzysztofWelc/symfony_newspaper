@@ -14,6 +14,9 @@ use Doctrine\Persistence\ObjectManager;
  */
 class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
+    /**
+     * @param ObjectManager $manager
+     */
     public function loadData(ObjectManager $manager): void
     {
         $this->createMany(150, 'comments', function ($i) {

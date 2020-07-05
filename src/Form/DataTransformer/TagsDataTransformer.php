@@ -9,6 +9,9 @@ use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
+/**
+ * Class TagsDataTransformer.
+ */
 class TagsDataTransformer implements DataTransformerInterface
 {
     /**
@@ -37,7 +40,7 @@ class TagsDataTransformer implements DataTransformerInterface
      */
     public function transform($tags): string
     {
-        if (null == $tags) {
+        if (null === $tags) {
             return '';
         }
 
@@ -71,7 +74,7 @@ class TagsDataTransformer implements DataTransformerInterface
         foreach ($tagTitles as $tagTitle) {
             if ('' !== trim($tagTitle)) {
                 $tag = $this->repository->findOneByName(strtolower($tagTitle));
-                if (null == $tag) {
+                if (null === $tag) {
                     $tag = new Tag();
                     $tag->setName($tagTitle);
                     $this->repository->save($tag);

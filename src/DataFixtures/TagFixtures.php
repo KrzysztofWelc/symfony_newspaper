@@ -14,6 +14,10 @@ use Doctrine\Persistence\ObjectManager;
  */
 class TagFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
+    /**
+     * Load data.
+     * @param ObjectManager $manager
+     */
     public function loadData(ObjectManager $manager): void
     {
         $this->createMany(20, 'tags', function ($i) {

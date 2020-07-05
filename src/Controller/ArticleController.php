@@ -1,4 +1,7 @@
 <?php
+/**
+ * Article controller.
+ */
 
 namespace App\Controller;
 

@@ -16,6 +16,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class CategoryService
 {
     /**
+     * Paginator interface.
      * @var Knp\Component\Pager\PaginatorInterface
      */
     private $paginator;
@@ -40,6 +41,7 @@ class CategoryService
     }
 
     /**
+     * Create list of categories.
      * @return array List of categories
      */
     public function createList(): array
@@ -48,8 +50,12 @@ class CategoryService
     }
 
     /**
+     * Create paginated list.
+     *
      * @param Category $category Category entity
      * @param int      $page     page index
+     *
+     * @return PaginationInterface
      */
     public function createPaginatedListOfArticles(Category $category, int $page): PaginationInterface
     {
@@ -61,6 +67,8 @@ class CategoryService
     }
 
     /**
+     * Save action.
+     *
      * @param Category $category Category Entity
      *
      * @throws \Doctrine\ORM\ORMException
@@ -72,6 +80,7 @@ class CategoryService
     }
 
     /**
+     * Delete action.
      * @param Category $category Category entity
      *
      * @throws \Doctrine\ORM\ORMException

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Login Form Authenticator.
+ */
 
 namespace App\Security;
 

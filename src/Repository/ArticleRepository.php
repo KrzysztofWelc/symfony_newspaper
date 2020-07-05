@@ -1,4 +1,7 @@
 <?php
+/**
+ * Article repo.
+ */
 
 namespace App\Repository;
 
@@ -27,6 +30,10 @@ class ArticleRepository extends ServiceEntityRepository
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;
 
+
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Article::class);
@@ -76,7 +83,7 @@ class ArticleRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder
      */
-    public function getUsersArticles(User $usr)
+    public function getUsersArticles(User $usr): QueryBuilder
     {
         $qb = $this->getOrCreateQueryBuilder();
 
@@ -93,8 +100,10 @@ class ArticleRepository extends ServiceEntityRepository
 
     /**
      * Get published articles.
+     *
+     * @return QueryBuilder
      */
-    public function getPublishedArticles()
+    public function getPublishedArticles(): QueryBuilder
     {
         $qb = $this->getOrCreateQueryBuilder();
 

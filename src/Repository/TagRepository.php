@@ -1,4 +1,7 @@
 <?php
+/**
+ * Tag repo.
+ */
 
 namespace App\Repository;
 
@@ -8,6 +11,8 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Tag repository.
+ *
  * @method Tag|null find($id, $lockMode = null, $lockVersion = null)
  * @method Tag|null findOneBy(array $criteria, array $orderBy = null)
  * @method Tag[]    findAll()
@@ -25,6 +30,8 @@ class TagRepository extends ServiceEntityRepository
     }
 
     /**
+     * Save action.
+     *
      * @param Tag $tag Objects
      *
      * @throws \Doctrine\ORM\ORMException
@@ -37,6 +44,8 @@ class TagRepository extends ServiceEntityRepository
     }
 
     /**
+     * Delete action.
+     *
      * @param Tag $tag Objects
      *
      * @throws \Doctrine\ORM\ORMException

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Comment voter.
+ */
 
 namespace App\Security\Voter;
 

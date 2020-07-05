@@ -42,7 +42,7 @@ class UserService
     /**
      * UserService constructor.
      *
-     * @param UserRepository               $repository User repository
+     * @param UserRepository               $repository        User repository
      * @param ArticleRepository            $articleRepository
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param PaginatorInterface           $paginator
@@ -72,11 +72,12 @@ class UserService
      * Change password.
      *
      * @param bool   $isAdmin User status
-     * @param User   $user User entity
-     * @param string $new new password
-     * @param string $old old password
+     * @param User   $user    User entity
+     * @param string $new     new password
+     * @param string $old     old password
      *
      * @return bool success status
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Comment Controller.
+ */
 
 namespace App\Controller;
 
@@ -40,14 +43,15 @@ class CommentController extends AbstractController
     /**
      * Add comment action.
      *
-     * @param Request             $request HTTP request
-     * @param Article             $article Article entity selected by id param form URL
+     * @param Request             $request    HTTP request
+     * @param Article             $article    Article entity selected by id param form URL
      * @param TranslatorInterface $translator
      *
      * @return Response HTTP Resposne
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     *
      * @Route(
      *     "/{id}/add",
      *     name="comment_add",
@@ -86,6 +90,8 @@ class CommentController extends AbstractController
     /**
      * @param Request $request http request
      * @param Comment $comment comment entity
+     *
+     * @return Response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException

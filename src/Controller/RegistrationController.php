@@ -1,4 +1,7 @@
 <?php
+/**
+ * Registration Controller.
+ */
 
 namespace App\Controller;
 
@@ -12,6 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
+/**
+ * Class RegistrationController.
+ */
 class RegistrationController extends AbstractController
 {
     /**

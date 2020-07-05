@@ -1,4 +1,7 @@
 <?php
+/**
+ * User controller.
+ */
 
 namespace App\Controller;
 
@@ -37,7 +40,7 @@ class UserController extends AbstractController
     /**
      * UserController constructor.
      *
-     * @param UserService         $service user service
+     * @param UserService         $service    user service
      * @param TranslatorInterface $translator
      */
     public function __construct(UserService $service, TranslatorInterface $translator)
@@ -72,6 +75,8 @@ class UserController extends AbstractController
      *
      * @param Request $request HTTP request
      * @param User    $usr     User entity
+     *
+     * @return Response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -111,6 +116,8 @@ class UserController extends AbstractController
      *
      * @param Request $request HTTP request
      * @param User    $usr     User entity
+     *
+     * @return Response
      *
      * @Route(
      *     "/user_change_password/{id}",

@@ -1,4 +1,7 @@
 <?php
+/**
+ * User repo.
+ */
 
 namespace App\Repository;
 

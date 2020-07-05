@@ -1,4 +1,7 @@
 <?php
+/**
+ * Article voter.
+ */
 
 namespace App\Security\Voter;
 
@@ -63,17 +66,9 @@ class ArticleVoter extends Voter
         }
 
         switch ($attribute) {
-            case 'VIEW':
-                if ($subject->getAuthor() === $user) {
-                    return true;
-                }
-                break;
             case 'EDIT':
-                if ($subject->getAuthor() === $user) {
-                    return true;
-                }
-            break;
             case 'DELETE':
+            case 'VIEW':
                 if ($subject->getAuthor() === $user) {
                     return true;
                 }

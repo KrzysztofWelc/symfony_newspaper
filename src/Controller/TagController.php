@@ -1,4 +1,7 @@
 <?php
+/**
+ * Tag controller.
+ */
 
 namespace App\Controller;
 
@@ -75,6 +78,8 @@ class TagController extends AbstractController
      * Show action.
      *
      * @param App\Entity\Tag $tag Tag entity
+     *
+     * @return Response
      *
      * @Route("/show/{code}", name="tag_show")
      */
