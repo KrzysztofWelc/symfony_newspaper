@@ -37,7 +37,7 @@ class ThumbnailType extends AbstractType
                 'required' => true,
                 'constraints' => new Image(
                     [
-                        'maxSize' => '1024k',
+                        'maxSize' => '5M',
                         'mimeTypes' => [
                             'image/png',
                             'image/jpeg',
