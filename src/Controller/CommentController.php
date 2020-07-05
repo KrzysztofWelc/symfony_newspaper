@@ -26,7 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CommentController extends AbstractController
 {
     /**
-     * @var App\Service\CommentService
+     * @var CommentService Comment service
      */
     private $commentService;
 
@@ -34,6 +34,7 @@ class CommentController extends AbstractController
      * CommentController constructor.
      *
      * @param CommentService $commentService
+     *
      */
     public function __construct(CommentService $commentService)
     {
@@ -88,6 +89,8 @@ class CommentController extends AbstractController
     }
 
     /**
+     * Delete comment route.
+     *
      * @param Request $request http request
      * @param Comment $comment comment entity
      *

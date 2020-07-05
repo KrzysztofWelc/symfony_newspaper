@@ -28,7 +28,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UserController extends AbstractController
 {
     /**
-     * @var App\Service\UserService
+     * @var UserService User service instance
      */
     private $userService;
 
@@ -40,7 +40,7 @@ class UserController extends AbstractController
     /**
      * UserController constructor.
      *
-     * @param UserService         $service    user service
+     * @param UserService         $service
      * @param TranslatorInterface $translator
      */
     public function __construct(UserService $service, TranslatorInterface $translator)

@@ -16,6 +16,8 @@ use Doctrine\Migrations\AbstractMigration;
 final class Version20200702154952 extends AbstractMigration
 {
     /**
+     * Get description.
+     *
      * @return string
      */
     public function getDescription(): string
@@ -24,6 +26,8 @@ final class Version20200702154952 extends AbstractMigration
     }
 
     /**
+     * Up.
+     *
      * @param Schema $schema
      *
      * @throws \Doctrine\DBAL\DBALException
@@ -37,6 +41,8 @@ final class Version20200702154952 extends AbstractMigration
     }
 
     /**
+     * Down.
+     *
      * @param Schema $schema
      *
      * @throws \Doctrine\DBAL\DBALException

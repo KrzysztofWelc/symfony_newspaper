@@ -28,7 +28,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class TagController extends AbstractController
 {
     /**
-     * @var TagRepository;
+     * @var TagRepository Tag repository instance.
      */
     private $repository;
 
@@ -91,6 +91,8 @@ class TagController extends AbstractController
     }
 
     /**
+     * Edit tag route.
+     *
      * @param Request $request
      * @param Tag     $tag
      *
@@ -125,6 +127,8 @@ class TagController extends AbstractController
     }
 
     /**
+     * Delete tag route.
+     *
      * @param Request $request
      * @param Tag     $tag
      *

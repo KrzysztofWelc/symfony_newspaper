@@ -26,7 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ThumbnailController extends AbstractController
 {
     /**
-     * @var App\Service\ArticleService
+     * @var ArticleService ArticleService instance.
      */
     private $articleService;
 
